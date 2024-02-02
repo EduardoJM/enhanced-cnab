@@ -4,11 +4,15 @@ from cnab.core.field import CNABField
 from cnab.core import exceptions
 
 class RegistroBase(ABC):
+    parent: Optional["RegistroBase"] = None
+
     _children: List["RegistroBase"] = []
     _meta: Optional[dict] = None
     _data: Optional[dict] = None
 
-    def __init__(self, **kwargs: dict):
+    def __init__(self, parent: Optional["RegistroBase"], **kwargs: dict):
+        self._children = []
+        self.parent = parent
         self._data = kwargs
 
     def get_field(self, key: str) -> CNABField:

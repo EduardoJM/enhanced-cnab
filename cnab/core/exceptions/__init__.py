@@ -7,6 +7,8 @@ from .field import (
     IsNotValidDateTimeError,
 )
 
+from .types import CNABInvalidTypeError
+
 __all__ = [
     'CNABFieldValueRequiredError',
     'CNABFieldNotIntegerError',
@@ -14,4 +16,6 @@ __all__ = [
     'CNABFieldTypeNotSupportedError',
     'IsNotCNABFieldError',
     'IsNotValidDateTimeError',
+
+    'CNABInvalidTypeError',
 ]

@@ -1,0 +1,3 @@
+- Registro0 -> HEADER
+- Registro1 -> LOTE
+- Registro5 -> LOTE REGISTROS
