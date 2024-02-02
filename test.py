@@ -1,5 +1,5 @@
 # from .cnab.remessa import Remessa
-from cnab.registro import RegistroRem
+from cnab.banks.santander.CNAB240.header import Santander240Header
 
 """
 cls = Remessa(
@@ -15,7 +15,6 @@ cls = Remessa(
     codigo_beneficiario=123456,
     numero_sequencial_arquivo=1
 )
-"""
 
 class Registro0(RegistroRem):
     def get_value(self, key, default):
@@ -182,7 +181,8 @@ class RegistroBB(Registro0):
         "filler7": {"tamanho": 12, "default": " ", "tipo": "alfa", "required": True},
     }
 
-ctb = RegistroBB(
+"""
+ctb = Santander240Header(
     nome_empresa="Empresa ABC",
     tipo_inscricao=2,
     numero_inscricao="70116028106",
