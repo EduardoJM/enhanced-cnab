@@ -6,9 +6,9 @@ from cnab.core.enums import TipoServico, TipoInscricao
 from cnab.core.exceptions import CNABInvalidTypeError
 
 class CNAB240LoteBase(RegistroRemessa):
-    def __init__(self, parent: Optional["RegistroBase"],**kwargs: dict):
+    def __init__(self, header: Optional["RegistroBase"], parent: Optional["RegistroBase"], **kwargs: dict):
         self.counter = 0
-        super().__init__(parent, **kwargs)
+        super().__init__(header, parent, **kwargs)
 
     def set_codigo_lote(self):
         self._data['codigo_lote'] = self.counter
@@ -24,13 +24,6 @@ class CNAB240LoteBase(RegistroRemessa):
             raise CNABInvalidTypeError(TipoInscricao)
         
         self._data['tipo_inscricao'] = value.value
-
-    def get_data_or_parent(self, field: str):
-        if self._data.get(field):
-            return self._data.get(field)
-        if not self.parent:
-            return None
-        return self.parent.get_value(field, None)
 
     def get_tipo_servico(self):
         return self.get_data_or_parent('tipo_servico')
@@ -58,3 +51,36 @@ class CNAB240LoteBase(RegistroRemessa):
     
     def get_codigo_beneficiario_dv(self):
         return self.get_data_or_parent('codigo_beneficiario_dv')
+    
+    def get_text(self) -> str:
+        dataReg5 = {}
+        dataReg5['qtd_titulos_simples'] = 0
+        dataReg5['qtd_titulos_caucionada'] = 0
+        dataReg5['qtd_titulos_descontada'] = 0
+        dataReg5['vrl_titulos_simples'] = 0.00
+        dataReg5['vlr_titulos_caucionada'] = 0.00
+        dataReg5['vlr_titulos_descontada'] = 0.00
+
+        retorno = ''
+        for key, field in self._meta.items():
+            retorno += self.get_value(key, field.default)
+
+        result = [retorno]
+
+        if self._children:
+            for child in self._children:
+                print(child.get_unformated('codigo_carteira'))
+                if child.get_codigo_carteira() == 1:
+                    dataReg5['qtd_titulos_simples'] += 1
+                    dataReg5['vrl_titulos_simples'] += child.get_unformated('valor')
+                if child.get_codigo_carteira() == 3:
+                    dataReg5['qtd_titulos_caucionada'] += 1
+                    dataReg5['vlr_titulos_caucionada'] += child.get_unformated('valor')
+                if child.get_codigo_carteira() == 4:
+                    dataReg5['qtd_titulos_descontada'] += 1
+                    dataReg5['vlr_titulos_descontada'] += child.get_unformated('valor')
+                result += child.get_text()
+
+            print(dataReg5)
+
+        return result
