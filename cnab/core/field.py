@@ -41,6 +41,7 @@ class CNABField:
         self.default = default
         self.required = required
         self.precision = precision
+        self.formatter = None
 
         self.validators = []
         if self.required:

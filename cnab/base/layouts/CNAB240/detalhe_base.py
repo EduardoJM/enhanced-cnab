@@ -26,6 +26,9 @@ class CNAB240DetalheBase(RegistroRemessa):
     def get_agencia_dv(self):
         return self.get_data_or_parent('agencia_dv')
     
+    def get_conta(self):
+        return self.get_data_or_parent('conta')
+
     def get_conta_dv(self):
         return self.get_data_or_parent('conta_dv')
     
@@ -38,6 +41,16 @@ class CNAB240DetalheBase(RegistroRemessa):
     def get_cep_pagador(self):
         cep = self.get_data_or_parent('cep_pagador')
         return cep.replace('-', '')
+    
+    def get_seu_numero2(self):
+        value = self._data.get('seu_numero2')
+        if value:
+            return value
+        
+        if hasattr(self, 'get_nosso_numero'):
+            return self.get_nosso_numero()
+        
+        return self._data.get('nosso_numero')
     
     def append(self, child: RegistroBase):
         super().append(child)

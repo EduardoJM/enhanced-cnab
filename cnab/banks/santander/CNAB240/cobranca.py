@@ -2,8 +2,10 @@ from typing import Optional
 from cnab.base.layouts.CNAB240 import CNAB240DetalheBase
 from cnab.core.field import CNABField, CNABFieldType
 from cnab.base.registro_base import RegistroBase
+from cnab.utils.mod11 import calculate_mod11_dv
 from .pagador import Santander240Pagador
 from .lote import Santander240Lote
+from .desconto_multa import Santander240DescontoMulta
 
 class Santander240Cobranca(CNAB240DetalheBase):
     _meta = {
@@ -222,9 +224,16 @@ class Santander240Cobranca(CNAB240DetalheBase):
             return
         
         Santander240Pagador(self.header, self, self.lote, **kwargs)
-        #self.append(cls)
-        #$class = 'CnabPHP\resources\\B' . RemessaAbstract::$banco . '\remessa\\' . RemessaAbstract::$layout . '\Registro3Q';
-        #$this->children[] = new $class($data);
+        
+        desconto2 = kwargs.get('codigo_desconto2')
+        desconto3 = kwargs.get('codigo_desconto3')
+        vlr_multa = kwargs.get('vlr_multa')
+        informacao_pagador = kwargs.get('informacao_pagador')
+        if not desconto2 and not desconto3 and not vlr_multa and not informacao_pagador:
+            return
+        
+        Santander240DescontoMulta(self.header, self, self.lote, **kwargs)
+
 
         """
         if ((int) $data['codigo_movimento'] != 2) {
@@ -239,3 +248,14 @@ class Santander240Cobranca(CNAB240DetalheBase):
             }
         }
         """
+
+    def get_codigo_beneficiario(self):
+        return self.get_data_or_parent('conta')
+    
+    def get_codigo_beneficiario_dv(self):
+        return self.get_data_or_parent('conta_dv')
+    
+    def get_nosso_numero(self):
+        num = str(self._data.get('nosso_numero'))
+        return num + str(calculate_mod11_dv(num))
+
