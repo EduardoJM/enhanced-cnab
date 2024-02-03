@@ -16,6 +16,10 @@ class RegistroBase(ABC):
         self._children = []
         self.parent = parent
         self._data = kwargs
+        
+        if not parent:
+            return
+        parent.append(self)
 
     def get_field(self, key: str) -> CNABField:
         item = self._meta[key]

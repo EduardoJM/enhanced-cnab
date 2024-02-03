@@ -1,4 +1,5 @@
 import re
+from unidecode import unidecode
 
 def remove_accents(text: str) -> str:
     regexes = [
@@ -21,6 +22,7 @@ def remove_accents(text: str) -> str:
     return text
 
 def prepare_text(text: str) -> str:
+    return unidecode(text.strip()).upper()
     return remove_accents(text.strip()).upper()
 
 def format_alfa(value, field):

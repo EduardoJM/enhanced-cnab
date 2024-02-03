@@ -11,7 +11,7 @@ class CNAB240LoteBase(RegistroRemessa):
         super().__init__(header, parent, **kwargs)
 
     def set_codigo_lote(self):
-        self._data['codigo_lote'] = self.counter
+        self._data['codigo_lote'] = self.header.counter
 
     def set_tipo_servico(self, value: TipoServico):
         if not isinstance(value, TipoServico):
@@ -86,3 +86,8 @@ class CNAB240LoteBase(RegistroRemessa):
             result += reg5.get_text()
 
         return result
+    
+    def append(self, child: RegistroBase):
+        super().append(child)
+
+        self.counter += 1

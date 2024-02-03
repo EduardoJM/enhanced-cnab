@@ -1,6 +1,9 @@
+from typing import Optional
 from cnab.base.layouts.CNAB240 import CNAB240DetalheBase
 from cnab.core.field import CNABField, CNABFieldType
-
+from cnab.base.registro_base import RegistroBase
+from .pagador import Santander240Pagador
+from .lote import Santander240Lote
 
 class Santander240Cobranca(CNAB240DetalheBase):
     _meta = {
@@ -202,3 +205,37 @@ class Santander240Cobranca(CNAB240DetalheBase):
             length=11, default=" ", validation=CNABFieldType.Alfa, required=True
         ),
     }
+
+    def __init__(
+        self,
+        header: Optional["RegistroBase"],
+        parent: Optional["RegistroBase"],
+        lote: Santander240Lote,
+        **kwargs: dict
+    ):
+        super().__init__(header, parent, lote, **kwargs)
+
+        self.inserir_detalhe(**kwargs)
+
+    def inserir_detalhe(self, **kwargs: dict):
+        if int(kwargs.get('codigo_movimento')) == 2:
+            return
+        
+        Santander240Pagador(self.header, self, self.lote, **kwargs)
+        #self.append(cls)
+        #$class = 'CnabPHP\resources\\B' . RemessaAbstract::$banco . '\remessa\\' . RemessaAbstract::$layout . '\Registro3Q';
+        #$this->children[] = new $class($data);
+
+        """
+        if ((int) $data['codigo_movimento'] != 2) {
+            $class = 'CnabPHP\resources\\B' . RemessaAbstract::$banco . '\remessa\\' . RemessaAbstract::$layout . '\Registro3Q';
+            $this->children[] = new $class($data);
+            if (isset($data['codigo_desconto2']) ||
+                    isset($data['codigo_desconto3']) ||
+                    isset($data['vlr_multa']) ||
+                    isset($data['informacao_pagador'])) {
+                $class = 'CnabPHP\resources\\B' . RemessaAbstract::$banco . '\remessa\\' . RemessaAbstract::$layout . '\Registro3R';
+                $this->children[] = new $class($data);
+            }
+        }
+        """

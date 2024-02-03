@@ -28,6 +28,7 @@ lote = Santander240Lote(
 cobranca = Santander240Cobranca(
     ctb,
     lote,
+    lote,
     conta_cobranca= '12345678', # número da conta cobranca obs(verificar se eh o mesmo da conta movimento)
     data_segundo_desconto= '',
     codigo_movimento=  1, # 1 = Entrada de título, para outras opções ver nota explicativa C004 manual Cnab_SIGCB na pasta docs
@@ -67,8 +68,8 @@ cobranca = Santander240Cobranca(
     taxa_juros=30.00, # taxa de juros em percentual
 )
 
-ctb.append(lote)
-lote.append(cobranca)
+#ctb.append(lote)
+#lote.append(cobranca)
 
 lines = ctb.get_text()
 #print(txt)
