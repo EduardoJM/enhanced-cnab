@@ -82,7 +82,7 @@ class CNAB240LoteBase(RegistroRemessa):
                 result += child.get_text()
 
             print(dataReg5)
-            reg5 = self.registro_class(None, None, **dataReg5)
+            reg5 = self.registro_class(None, None, self, **dataReg5)
             result += reg5.get_text()
 
         return result
