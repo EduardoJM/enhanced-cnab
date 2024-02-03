@@ -3,6 +3,7 @@ from datetime import date
 from cnab.banks.santander.CNAB240.header import Santander240Header
 from cnab.banks.santander.CNAB240.lote import Santander240Lote
 from cnab.banks.santander.CNAB240.cobranca import Santander240Cobranca
+from cnab.banks.santander.CNAB240.footer import Santander240Footer
 
 ctb = Santander240Header(
     None,
@@ -109,6 +110,8 @@ cobranca = Santander240Cobranca(
     vlr_multa         =30.00, # valor da multa
 )
 
-lines = ctb.get_text()
+footer = Santander240Footer(ctb, None, **{ '1': 1 })
+
+lines = ctb.get_text() + footer.get_text()
 with open('remessa-test.rem', 'w') as f:
     f.write('\r\n'.join(lines))
