@@ -37,6 +37,15 @@ class CNAB240LoteBase(RegistroRemessa):
     def get_agencia(self):
         return self.get_data_or_parent('agencia')
     
+    def get_agencia_dv(self):
+        return self.get_data_or_parent('agencia_dv')
+    
+    def get_conta(self):
+        return self.get_data_or_parent('agencia')
+    
+    def get_conta_dv(self):
+        return self.get_data_or_parent('agencia_dv')
+    
     def get_nome_empresa(self):
         return self.get_data_or_parent('nome_empresa')
     

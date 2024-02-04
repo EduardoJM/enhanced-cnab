@@ -65,6 +65,10 @@ class CNABField:
             self.validators += [validators.validate_date]
             self.formatter = formatter.format_date
 
+        if self.validation == CNABFieldType.Time:
+            self.validators += [validators.validate_date]
+            self.formatter = formatter.format_time
+
         if not self.formatter:
             raise exceptions.CNABFieldTypeNotSupportedError(self.validation)
         
