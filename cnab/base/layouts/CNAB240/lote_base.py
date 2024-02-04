@@ -81,13 +81,13 @@ class CNAB240LoteBase(RegistroRemessa):
                 print(child.get_unformated('codigo_carteira'))
                 if child.get_codigo_carteira() == 1:
                     dataReg5['qtd_titulos_simples'] += 1
-                    dataReg5['vrl_titulos_simples'] += child.get_unformated('valor')
+                    dataReg5['vrl_titulos_simples'] += float(child.get_unformated('valor'))
                 if child.get_codigo_carteira() == 3:
                     dataReg5['qtd_titulos_caucionada'] += 1
-                    dataReg5['vlr_titulos_caucionada'] += child.get_unformated('valor')
+                    dataReg5['vlr_titulos_caucionada'] += float(child.get_unformated('valor'))
                 if child.get_codigo_carteira() == 4:
                     dataReg5['qtd_titulos_descontada'] += 1
-                    dataReg5['vlr_titulos_descontada'] += child.get_unformated('valor')
+                    dataReg5['vlr_titulos_descontada'] += float(child.get_unformated('valor'))
                 result += child.get_text()
 
             print(dataReg5)

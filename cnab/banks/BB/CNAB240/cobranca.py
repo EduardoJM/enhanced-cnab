@@ -2,14 +2,14 @@ from typing import Optional
 from cnab.base.layouts.CNAB240 import CNAB240DetalheBase
 from cnab.core.field import CNABField, CNABFieldType
 from cnab.base.registro_base import RegistroBase
-
-# from cnab.utils.mod11 import calculate_mod11_dv
-#from .pagador import Santander240Pagador
+from .Registro3Q import BancoBrasil240Registro3Q
+from .Registro3R import BancoBrasil240Registro3R
+from .Registro3S1e2 import BancoBrasil240Registro3S1e2
+from .Registro3S3 import BancoBrasil240Registro3S3
 from .lote import BancoBrasil240Lote
-#from .desconto_multa import Santander240DescontoMulta
 
 
-class Santander240Cobranca(CNAB240DetalheBase):
+class BancoBrasil240Cobranca(CNAB240DetalheBase):
     _meta = {
         "codigo_banco": CNABField(  # 1.3P
             length=3, default="001", validation=CNABFieldType.Int, required=True
@@ -186,32 +186,36 @@ class Santander240Cobranca(CNAB240DetalheBase):
 
         self.inserir_detalhe(**kwargs)
 
-    def inserir_detalhe(self, **kwargs: dict):
-        if int(kwargs.get("codigo_movimento")) == 2:
-            return
-
-        """
-        TODO: continuar aqui
-        Santander240Pagador(self.header, self, self.lote, **kwargs)
-
+    def inserir_desconto_mensagem(self, **kwargs):
         desconto2 = kwargs.get("codigo_desconto2")
         desconto3 = kwargs.get("codigo_desconto3")
-        vlr_multa = kwargs.get("vlr_multa")
-        informacao_pagador = kwargs.get("informacao_pagador")
-        if not desconto2 and not desconto3 and not vlr_multa and not informacao_pagador:
+        mensagem = kwargs.get("mensagem")
+        if not desconto2 and not desconto3 and not mensagem:
             return
+        
+        BancoBrasil240Registro3R(self.header, self, self.lote, **kwargs)
 
-        Santander240DescontoMulta(self.header, self, self.lote, **kwargs)
-        """
+    def inserir_detalhe(self, **kwargs: dict):
+        BancoBrasil240Registro3Q(self.header, self, self.lote, **kwargs)
+        self.inserir_desconto_mensagem(**kwargs)
 
-    """
-    def get_codigo_beneficiario(self):
-        return self.get_data_or_parent('conta')
-    
-    def get_codigo_beneficiario_dv(self):
-        return self.get_data_or_parent('conta_dv')
-    
-    def get_nosso_numero(self):
-        num = str(self._data.get('nosso_numero'))
-        return num + str(calculate_mod11_dv(num))
-    """
+        if int(kwargs.get("emissao_boleto")) != 1:
+            return
+        
+        if kwargs.get('mensagem_frente'):
+            kwargs['mensagem_140'] = kwargs.get('mensagem_frente')
+            kwargs['tipo_impressao'] = 1
+            BancoBrasil240Registro3S1e2(self.header, self, self.lote, **kwargs)
+
+        if kwargs.get('mensagem_verso'):
+            kwargs['mensagem_140'] = kwargs.get('mensagem_verso')
+            kwargs['tipo_impressao'] = 2
+            BancoBrasil240Registro3S1e2(self.header, self, self.lote, **kwargs)
+
+        if kwargs.get('mensagem'):
+            mensagem = str(kwargs.get('mensagem'))
+            lines = mensagem.splitlines()
+            if len(lines) < 4:
+                return
+            
+            BancoBrasil240Registro3S3(self.header, self, self.lote, **kwargs)

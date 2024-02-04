@@ -40,7 +40,17 @@ class CNAB240DetalheBase(RegistroRemessa):
     
     def get_cep_pagador(self):
         cep = self.get_data_or_parent('cep_pagador')
+        
+        if self._meta.get('cep_sufixo'):
+            return cep.split('-')[0][0:5]
+        
         return cep.replace('-', '')
+    
+    def get_cep_sufixo(self):
+        cep = self.get_data_or_parent('cep_pagador')
+        if "-" in cep:
+            return cep.split('-')[-1]
+        return cep[-3:]
     
     def get_seu_numero2(self):
         value = self._data.get('seu_numero2')
