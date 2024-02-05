@@ -1,12 +1,13 @@
 from datetime import date
-from cnab.banks.BB.CNAB240.header import BancoBrasil240Header
-from cnab.banks.BB.CNAB240.lote import BancoBrasil240Lote
-from cnab.banks.BB.CNAB240.cobranca import BancoBrasil240Cobranca
+
+from cnab.banks.BB.CNAB240.Registro0 import BancoBrasil240Registro0
+
+#from cnab.banks.BB.CNAB240.header import BancoBrasil240Header
+#from cnab.banks.BB.CNAB240.lote import BancoBrasil240Lote
+#from cnab.banks.BB.CNAB240.Registro3P import BancoBrasil240Registro3P
 from cnab.banks.BB.CNAB240.Registro9 import BancoBrasil240Registro9
 
-header = BancoBrasil240Header(
-    None,
-    None,
+header = BancoBrasil240Registro0(
     tipo_inscricao="1",  # 1 para cpf, 2 cnpj
     numero_inscricao="70116028106",  # seu cpf ou cnpj completo
     agencia="324",  # agencia sem o digito verificador
@@ -18,13 +19,9 @@ header = BancoBrasil240Header(
     convenio="106608",  # codigo fornecido pelo banco
     carteira="17",  # codigo fornecido pelo banco
     situacao_arquivo="",  # Deve ficar em branco para ser aceito. (TS para testes)
-    uso_bb1="009999999001411222",  # Deve ter 18 dígitos
 )
-lote = BancoBrasil240Lote(header, header, tipo_servico=1, variacao="027")
-cobranca = BancoBrasil240Cobranca(
-    header,
-    lote,
-    lote,
+lote = header.inserir_lote(tipo_servico=1, variacao="027")
+cobranca = lote.inserir_detalhe(
     # Registro 3P Dados do Boleto
     nosso_numero="1800001",  # numero sequencial de boleto
     # Consulte a pág. 9 da documentação para mais informações sobre o nosso número

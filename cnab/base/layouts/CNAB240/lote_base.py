@@ -41,10 +41,13 @@ class CNAB240LoteBase(RegistroRemessa):
         return self.get_data_or_parent('agencia_dv')
     
     def get_conta(self):
-        return self.get_data_or_parent('agencia')
+        return self.get_data_or_parent('conta')
     
     def get_conta_dv(self):
-        return self.get_data_or_parent('agencia_dv')
+        return self.get_data_or_parent('conta_dv')
+    
+    def get_convenio(self):
+        return self.get_data_or_parent('convenio')
     
     def get_nome_empresa(self):
         return self.get_data_or_parent('nome_empresa')
@@ -78,7 +81,6 @@ class CNAB240LoteBase(RegistroRemessa):
 
         if self._children:
             for child in self._children:
-                print(child.get_unformated('codigo_carteira'))
                 if child.get_codigo_carteira() == 1:
                     dataReg5['qtd_titulos_simples'] += 1
                     dataReg5['vrl_titulos_simples'] += float(child.get_unformated('valor'))
@@ -90,8 +92,12 @@ class CNAB240LoteBase(RegistroRemessa):
                     dataReg5['vlr_titulos_descontada'] += float(child.get_unformated('valor'))
                 result += child.get_text()
 
-            print(dataReg5)
-            reg5 = self.registro_class(None, None, self, **dataReg5)
+            if not hasattr(self, 'registro5_class'):
+                raise Exception("TODO: change the text of this exception")
+            if not self.registro5_class:
+                raise Exception("TODO: change the text of this exception")
+                
+            reg5 = self.registro5_class(None, None, self, **dataReg5)
             result += reg5.get_text()
 
         return result

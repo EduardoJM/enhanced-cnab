@@ -6,10 +6,11 @@ from .Registro3Q import BancoBrasil240Registro3Q
 from .Registro3R import BancoBrasil240Registro3R
 from .Registro3S1e2 import BancoBrasil240Registro3S1e2
 from .Registro3S3 import BancoBrasil240Registro3S3
-from .lote import BancoBrasil240Lote
+from .Registro1 import BancoBrasil240Registro1
+from .Registro0 import BancoBrasil240Registro0
 
 
-class BancoBrasil240Cobranca(CNAB240DetalheBase):
+class BancoBrasil240Registro3P(CNAB240DetalheBase):
     _meta = {
         "codigo_banco": CNABField(  # 1.3P
             length=3, default="001", validation=CNABFieldType.Int, required=True
@@ -175,18 +176,7 @@ class BancoBrasil240Cobranca(CNAB240DetalheBase):
         ),
     }
 
-    def __init__(
-        self,
-        header: Optional["RegistroBase"],
-        parent: Optional["RegistroBase"],
-        lote: BancoBrasil240Lote,
-        **kwargs: dict,
-    ):
-        super().__init__(header, parent, lote, **kwargs)
-
-        self.inserir_detalhe(**kwargs)
-
-    def inserir_desconto_mensagem(self, **kwargs):
+    def _inserir_desconto_mensagem(self, **kwargs):
         desconto2 = kwargs.get("codigo_desconto2")
         desconto3 = kwargs.get("codigo_desconto3")
         mensagem = kwargs.get("mensagem")
@@ -195,9 +185,9 @@ class BancoBrasil240Cobranca(CNAB240DetalheBase):
         
         BancoBrasil240Registro3R(self.header, self, self.lote, **kwargs)
 
-    def inserir_detalhe(self, **kwargs: dict):
+    def _inserir_detalhe(self, **kwargs: dict):
         BancoBrasil240Registro3Q(self.header, self, self.lote, **kwargs)
-        self.inserir_desconto_mensagem(**kwargs)
+        self._inserir_desconto_mensagem(**kwargs)
 
         if int(kwargs.get("emissao_boleto")) != 1:
             return
@@ -219,3 +209,14 @@ class BancoBrasil240Cobranca(CNAB240DetalheBase):
                 return
             
             BancoBrasil240Registro3S3(self.header, self, self.lote, **kwargs)
+
+    def __init__(
+        self,
+        header: Optional[BancoBrasil240Registro0],
+        parent: Optional[RegistroBase],
+        lote: BancoBrasil240Registro1,
+        **kwargs: dict,
+    ):
+        super().__init__(header, parent, lote, **kwargs)
+
+        self._inserir_detalhe(**kwargs)

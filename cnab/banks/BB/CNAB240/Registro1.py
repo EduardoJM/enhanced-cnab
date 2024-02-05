@@ -1,10 +1,10 @@
 from cnab.base.layouts.CNAB240 import CNAB240LoteBase
 from cnab.core.field import CNABField, CNABFieldType
-from .registros import BancoBrasil240Registro
+from .Registro5 import BancoBrasil240Registro5
 
 
-class BancoBrasil240Lote(CNAB240LoteBase):
-    registro_class = BancoBrasil240Registro
+class BancoBrasil240Registro1(CNAB240LoteBase):
+    registro5_class = BancoBrasil240Registro5
     _meta = {
         "codigo_banco": CNABField(  # 01.1
             length=3, default="001", validation=CNABFieldType.Int, required=True
@@ -91,3 +91,7 @@ class BancoBrasil240Lote(CNAB240LoteBase):
             length=33, default=" ", validation=CNABFieldType.Alfa, required=True
         ),
     }
+
+    def inserir_detalhe(self, **kwargs):
+        from .Registro3P import BancoBrasil240Registro3P
+        return BancoBrasil240Registro3P(self.header, self, self, **kwargs)

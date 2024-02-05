@@ -2,7 +2,7 @@ from cnab.base.layouts.CNAB240 import CNAB240HeaderBase
 from cnab.core.field import CNABField, CNABFieldType
 
 
-class BancoBrasil240Header(CNAB240HeaderBase):
+class BancoBrasil240Registro0(CNAB240HeaderBase):
     _meta = {
         "codigo_banco": CNABField(  # 01.0
             length=3, default="001", validation=CNABFieldType.Int, required=True
@@ -22,8 +22,20 @@ class BancoBrasil240Header(CNAB240HeaderBase):
         "numero_inscricao": CNABField(  # 06.0
             length=14, default="0", validation=CNABFieldType.Int, required=True
         ),
-        "uso_bb1": CNABField(  # 07.0
-            length=20, default=" ", validation=CNABFieldType.Alfa, required=True
+        "convenio": CNABField(  # 07.0 BB1
+            length=9, default="0", validation=CNABFieldType.Int, required=True
+        ),
+        "cobranca_cedente": CNABField(  # 07.0 BB2
+            length=4, default="0014", validation=CNABFieldType.Int, required=True
+        ),
+        "carteira_cobranca": CNABField(  # 07.0 BB3
+            length=2, default="11", validation=CNABFieldType.Int, required=True
+        ),
+        "variacao_carteira_cobranca": CNABField(  # 07.0 BB4
+            length=3, default="222", validation=CNABFieldType.Int, required=True
+        ),
+        "reservado_bb": CNABField(  # 07.0 BB5
+            length=2, default=" ", validation=CNABFieldType.Alfa, required=True
         ),
         "agencia": CNABField(  # 08.0
             length=5, default="0", validation=CNABFieldType.Int, required=True
@@ -95,3 +107,10 @@ class BancoBrasil240Header(CNAB240HeaderBase):
             length=12, default=" ", validation=CNABFieldType.Alfa, required=True
         ),
     }
+
+    def __init__(self, **kwargs: dict):
+        super().__init__(None, None, **kwargs)
+
+    def inserir_lote(self, **kwargs: dict):
+        from .Registro1 import BancoBrasil240Registro1
+        return BancoBrasil240Registro1(self, self, **kwargs)
