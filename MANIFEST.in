@@ -1,0 +1,5 @@
+include README.md
+include LICENSE
+recursive-include cnab *
+recursive-include image_uploader_widget/static *
+recursive-include image_uploader_widget/templates *
