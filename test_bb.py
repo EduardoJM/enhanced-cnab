@@ -1,13 +1,7 @@
 from datetime import date
+from cnab.banks.BB import CNAB240BancoBrasil
 
-from cnab.banks.BB.CNAB240.Registro0 import BancoBrasil240Registro0
-
-#from cnab.banks.BB.CNAB240.header import BancoBrasil240Header
-#from cnab.banks.BB.CNAB240.lote import BancoBrasil240Lote
-#from cnab.banks.BB.CNAB240.Registro3P import BancoBrasil240Registro3P
-from cnab.banks.BB.CNAB240.Registro9 import BancoBrasil240Registro9
-
-header = BancoBrasil240Registro0(
+cnab = CNAB240BancoBrasil(
     tipo_inscricao="1",  # 1 para cpf, 2 cnpj
     numero_inscricao="70116028106",  # seu cpf ou cnpj completo
     agencia="324",  # agencia sem o digito verificador
@@ -20,7 +14,7 @@ header = BancoBrasil240Registro0(
     carteira="17",  # codigo fornecido pelo banco
     situacao_arquivo="",  # Deve ficar em branco para ser aceito. (TS para testes)
 )
-lote = header.inserir_lote(tipo_servico=1, variacao="027")
+lote = cnab.inserir_lote(tipo_servico=1, variacao="027")
 cobranca = lote.inserir_detalhe(
     # Registro 3P Dados do Boleto
     nosso_numero="1800001",  # numero sequencial de boleto
@@ -76,8 +70,6 @@ cobranca = lote.inserir_detalhe(
     codigo_banco_correspondente="001",
 )
 
-footer = BancoBrasil240Registro9(header, None, **{ '1': 1 })
-
-lines = header.get_text() + footer.get_text()
+lines = cnab.get_text()
 with open("bb.rem", "w") as f:
     f.write("\r\n".join(lines))
