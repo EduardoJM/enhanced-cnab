@@ -2,7 +2,7 @@ from typing import Optional
 from cnab.base.layouts.CNAB240 import CNAB240Registro3
 from cnab.core.field import CNABField, CNABFieldType
 from cnab.base.registro_base import RegistroBase
-from cnab.utils.mod11 import calculate_mod11_dv
+from cnab.utils.check_digit import compute_check_digit
 from .Registro3Q import Santander240Registro3Q
 from .Registro1 import Santander240Registro1
 from .Registro3R import Santander240Registro3R
@@ -242,5 +242,5 @@ class Santander240Registro3P(CNAB240Registro3):
     
     def get_nosso_numero(self):
         num = str(self._data.get('nosso_numero'))
-        return num + str(calculate_mod11_dv(num))
+        return num + str(compute_check_digit(num))
 

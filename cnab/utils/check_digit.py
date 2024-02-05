@@ -1,7 +1,7 @@
 from typing import Union
 from functools import reduce
 
-class Mod11Calculator:
+class Modulo11Calculator:
     def get_factor(self, num):
         digits = [2, 3, 4, 5, 6, 7, 8, 9]
         if num >= len(digits):
@@ -34,4 +34,4 @@ class Mod11Calculator:
         sum = self.compute_sum(digits, factors)
         return self.compute_verify_digit(sum)
 
-calculate_mod11_dv = Mod11Calculator()
+compute_check_digit = Modulo11Calculator()
