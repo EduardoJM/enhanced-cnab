@@ -1,5 +1,5 @@
 from datetime import date
-from cnab.banks.BB import CNAB240BancoBrasil
+from cnab.banks.banco_brasil import CNAB240BancoBrasil
 
 cnab = CNAB240BancoBrasil(
     tipo_inscricao="1",  # 1 para cpf, 2 cnpj

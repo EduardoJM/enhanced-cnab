@@ -1,9 +1,8 @@
 # from .cnab.remessa import Remessa
 from datetime import date
-from cnab.banks.santander.CNAB240.Registro0 import Santander240Registro0
-from cnab.banks.santander.CNAB240.Registro9 import Santander240Registro9
+from cnab.banks.santander import CNAB240Santander
 
-ctb = Santander240Registro0(
+cnab = CNAB240Santander(
     nome_empresa="Empresa ABC",
     tipo_inscricao=2,
     numero_inscricao="12312212356",
@@ -16,7 +15,7 @@ ctb = Santander240Registro0(
     codigo_beneficiario_dv=2,
     numero_sequencial_arquivo=1
 )
-lote = ctb.inserir_lote(
+lote = cnab.inserir_lote(
     tipo_servico=1,
     codigo_transmissao='12345678901234567890'
 )
@@ -98,8 +97,6 @@ cobranca = lote.inserir_detalhe(
     vlr_multa         =30.00, # valor da multa
 )
 
-footer = Santander240Registro9(ctb, None, **{ '1': 1 })
-
-lines = ctb.get_text() + footer.get_text()
+lines = cnab.get_text()
 with open('remessa-test.rem', 'w') as f:
     f.write('\r\n'.join(lines))
