@@ -1,9 +1,9 @@
-from cnab.base.layouts.CNAB240 import CNAB240LoteBase
+from cnab.base.layouts.CNAB240 import CNAB240Registro1
 from cnab.core.field import CNABField, CNABFieldType
-from .registros import Santander240Registro
+from .Registro5 import Santander240Registro5
 
-class Santander240Lote(CNAB240LoteBase):
-    registro5_class = Santander240Registro
+class Santander240Registro1(CNAB240Registro1):
+    registro5_class = Santander240Registro5
     _meta = {
         "codigo_banco": CNABField(
             length=3, default="033", validation=CNABFieldType.Int, required=True
@@ -83,3 +83,7 @@ class Santander240Lote(CNAB240LoteBase):
             length=41, default=" ", validation=CNABFieldType.Alfa, required=True
         ),
     }
+
+    def inserir_detalhe(self, **kwargs):
+        from .Registro3P import Santander240Registro3P
+        return Santander240Registro3P(self.header, self, self, **kwargs)

@@ -1,9 +1,9 @@
-from cnab.base.layouts.CNAB240 import CNAB240LoteBase
+from cnab.base.layouts.CNAB240 import CNAB240Registro1
 from cnab.core.field import CNABField, CNABFieldType
 from .Registro5 import BancoBrasil240Registro5
 
 
-class BancoBrasil240Registro1(CNAB240LoteBase):
+class BancoBrasil240Registro1(CNAB240Registro1):
     registro5_class = BancoBrasil240Registro5
     _meta = {
         "codigo_banco": CNABField(  # 01.1

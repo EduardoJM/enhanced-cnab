@@ -1,13 +1,9 @@
 # from .cnab.remessa import Remessa
 from datetime import date
-from cnab.banks.santander.CNAB240.header import Santander240Header
-from cnab.banks.santander.CNAB240.lote import Santander240Lote
-from cnab.banks.santander.CNAB240.cobranca import Santander240Cobranca
-from cnab.banks.santander.CNAB240.footer import Santander240Footer
+from cnab.banks.santander.CNAB240.Registro0 import Santander240Registro0
+from cnab.banks.santander.CNAB240.Registro9 import Santander240Registro9
 
-ctb = Santander240Header(
-    None,
-    None,
+ctb = Santander240Registro0(
     nome_empresa="Empresa ABC",
     tipo_inscricao=2,
     numero_inscricao="12312212356",
@@ -20,16 +16,11 @@ ctb = Santander240Header(
     codigo_beneficiario_dv=2,
     numero_sequencial_arquivo=1
 )
-lote = Santander240Lote(
-    ctb,
-    ctb,
+lote = ctb.inserir_lote(
     tipo_servico=1,
     codigo_transmissao='12345678901234567890'
 )
-cobranca = Santander240Cobranca(
-    ctb,
-    lote,
-    lote,
+cobranca = lote.inserir_detalhe(
     conta_cobranca= '12345678', # número da conta cobranca obs(verificar se eh o mesmo da conta movimento)
     data_segundo_desconto= '',
     codigo_movimento=  1, # 1 = Entrada de título, para outras opções ver nota explicativa C004 manual Cnab_SIGCB na pasta docs
@@ -69,10 +60,7 @@ cobranca = Santander240Cobranca(
     taxa_juros=30.00, # taxa de juros em percentual
 )
 
-cobranca = Santander240Cobranca(
-    ctb,
-    lote,
-    lote,
+cobranca = lote.inserir_detalhe(
     conta_cobranca ='12345678', # número da conta cobranca obs(verificar se eh o mesmo da conta movimento)
     data_segundo_desconto ='', 
     codigo_movimento =1, #1 = Entrada de título, para outras opções ver nota explicativa C004 manual Cnab_SIGCB na pasta docs
@@ -110,7 +98,7 @@ cobranca = Santander240Cobranca(
     vlr_multa         =30.00, # valor da multa
 )
 
-footer = Santander240Footer(ctb, None, **{ '1': 1 })
+footer = Santander240Registro9(ctb, None, **{ '1': 1 })
 
 lines = ctb.get_text() + footer.get_text()
 with open('remessa-test.rem', 'w') as f:

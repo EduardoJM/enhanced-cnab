@@ -1,13 +1,13 @@
 from typing import Optional
-from cnab.base.layouts.CNAB240 import CNAB240DetalheBase
+from cnab.base.layouts.CNAB240 import CNAB240Registro3
 from cnab.core.field import CNABField, CNABFieldType
 from cnab.base.registro_base import RegistroBase
 from cnab.utils.mod11 import calculate_mod11_dv
-from .pagador import Santander240Pagador
-from .lote import Santander240Lote
-from .desconto_multa import Santander240DescontoMulta
+from .Registro3Q import Santander240Registro3Q
+from .Registro1 import Santander240Registro1
+from .Registro3R import Santander240Registro3R
 
-class Santander240Cobranca(CNAB240DetalheBase):
+class Santander240Registro3P(CNAB240Registro3):
     _meta = {
         "codigo_banco": CNABField(
             length=3, default="033", validation=CNABFieldType.Int, required=True
@@ -208,22 +208,11 @@ class Santander240Cobranca(CNAB240DetalheBase):
         ),
     }
 
-    def __init__(
-        self,
-        header: Optional["RegistroBase"],
-        parent: Optional["RegistroBase"],
-        lote: Santander240Lote,
-        **kwargs: dict
-    ):
-        super().__init__(header, parent, lote, **kwargs)
-
-        self.inserir_detalhe(**kwargs)
-
-    def inserir_detalhe(self, **kwargs: dict):
+    def _inserir_detalhe(self, **kwargs: dict):
         if int(kwargs.get('codigo_movimento')) == 2:
             return
         
-        Santander240Pagador(self.header, self, self.lote, **kwargs)
+        Santander240Registro3Q(self.header, self, self.lote, **kwargs)
         
         desconto2 = kwargs.get('codigo_desconto2')
         desconto3 = kwargs.get('codigo_desconto3')
@@ -232,22 +221,18 @@ class Santander240Cobranca(CNAB240DetalheBase):
         if not desconto2 and not desconto3 and not vlr_multa and not informacao_pagador:
             return
         
-        Santander240DescontoMulta(self.header, self, self.lote, **kwargs)
+        Santander240Registro3R(self.header, self, self.lote, **kwargs)
 
+    def __init__(
+        self,
+        header: Optional["RegistroBase"],
+        parent: Optional["RegistroBase"],
+        lote: Santander240Registro1,
+        **kwargs: dict
+    ):
+        super().__init__(header, parent, lote, **kwargs)
 
-        """
-        if ((int) $data['codigo_movimento'] != 2) {
-            $class = 'CnabPHP\resources\\B' . RemessaAbstract::$banco . '\remessa\\' . RemessaAbstract::$layout . '\Registro3Q';
-            $this->children[] = new $class($data);
-            if (isset($data['codigo_desconto2']) ||
-                    isset($data['codigo_desconto3']) ||
-                    isset($data['vlr_multa']) ||
-                    isset($data['informacao_pagador'])) {
-                $class = 'CnabPHP\resources\\B' . RemessaAbstract::$banco . '\remessa\\' . RemessaAbstract::$layout . '\Registro3R';
-                $this->children[] = new $class($data);
-            }
-        }
-        """
+        self._inserir_detalhe(**kwargs)
 
     def get_codigo_beneficiario(self):
         return self.get_data_or_parent('conta')

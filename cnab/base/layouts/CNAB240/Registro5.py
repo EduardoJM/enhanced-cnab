@@ -1,15 +1,15 @@
 from typing import Optional
 from cnab.base.registro_base import RegistroBase
 from cnab.base.registro_remessa import RegistroRemessa
-from cnab.base.layouts.CNAB240 import CNAB240LoteBase
+from .Registro1 import CNAB240Registro1
 
-class CNAB240RegistrosBase(RegistroRemessa):
-    lote: CNAB240LoteBase = None
+class CNAB240Registro5(RegistroRemessa):
+    lote: CNAB240Registro1 = None
 
     def __init__(self,
         header: Optional["RegistroBase"],
         parent: Optional["RegistroBase"],
-        lote: CNAB240LoteBase,
+        lote: CNAB240Registro1,
         **kwargs: dict,
     ):
         self.lote = lote

@@ -1,6 +1,6 @@
 from cnab.base.registro_remessa import RegistroRemessa
 
-class CNAB240FooterBase(RegistroRemessa):
+class CNAB240Registro9(RegistroRemessa):
     def get_qtd_lotes(self):
         return self.header.counter
     

@@ -1,7 +1,7 @@
-from cnab.base.layouts.CNAB240 import CNAB240FooterBase
+from cnab.base.layouts.CNAB240 import CNAB240Registro9
 from cnab.core.field import CNABField, CNABFieldType
 
-class Santander240Footer(CNAB240FooterBase):
+class Santander240Registro9(CNAB240Registro9):
     _meta = {
         'codigo_banco': CNABField(
             length=3,

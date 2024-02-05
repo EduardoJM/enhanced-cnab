@@ -1,5 +1,5 @@
 from typing import Optional
-from cnab.base.layouts.CNAB240 import CNAB240DetalheBase
+from cnab.base.layouts.CNAB240 import CNAB240Registro3
 from cnab.core.field import CNABField, CNABFieldType
 from cnab.base.registro_base import RegistroBase
 from .Registro3Q import BancoBrasil240Registro3Q
@@ -10,7 +10,7 @@ from .Registro1 import BancoBrasil240Registro1
 from .Registro0 import BancoBrasil240Registro0
 
 
-class BancoBrasil240Registro3P(CNAB240DetalheBase):
+class BancoBrasil240Registro3P(CNAB240Registro3):
     _meta = {
         "codigo_banco": CNABField(  # 1.3P
             length=3, default="001", validation=CNABFieldType.Int, required=True

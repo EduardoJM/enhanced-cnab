@@ -1,8 +1,8 @@
-from cnab.base.layouts.CNAB240 import CNAB240RegistrosBase
+from cnab.base.layouts.CNAB240 import CNAB240Registro5
 from cnab.core.field import CNABField, CNABFieldType
 
 
-class BancoBrasil240Registro5(CNAB240RegistrosBase):
+class BancoBrasil240Registro5(CNAB240Registro5):
     _meta = {
         "codigo_banco": CNABField(  # 01.5
             length=3, default="001", validation=CNABFieldType.Int, required=True
