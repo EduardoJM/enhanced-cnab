@@ -63,8 +63,8 @@ cobranca = lote.inserir_detalhe(
     data_multa=date(2018, 4, 30),  # data dos juros, mesma do vencimento
     vlr_multa="0000000000002.00",  # Valor do juros de 2% ao mês
     # Registro 3S3 Mensagens a serem impressas
-    mensagem_1="Após venc. Mora 0,03%/dia e Multa 2,00%",
-    mensagem_2="Não conceder desconto",
+    mensagem_fixa1="Após venc. Mora 0,03%/dia e Multa 2,00%",
+    mensagem_fixa2="Não conceder desconto",
     mensagem_3="Sujeito a protesto após o vencimento",
     mensagem_4="VelvetTux Soluções em Sistemas <('')",
     codigo_banco_correspondente="001",
