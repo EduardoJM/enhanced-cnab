@@ -1,6 +1,7 @@
 from typing import Optional
 from cnab.base.registro_remessa import RegistroRemessa
 from cnab.base.registro import Registro
+from cnab.core.especie import EspecieTitulo
 from .registro1 import CNAB240Registro1
 
 class CNAB240Registro3(RegistroRemessa):
@@ -65,4 +66,11 @@ class CNAB240Registro3(RegistroRemessa):
     def append(self, child: Registro):
         super().append(child)
         self.lote.counter += 1
+
+    def get_especie_titulo(self):
+        field = self.get_field('codigo_banco')
+        return EspecieTitulo.get_real_value(
+            field.default,
+            self._data.get('especie_titulo')
+        )
     

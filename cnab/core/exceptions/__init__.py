@@ -9,6 +9,8 @@ from .field import (
 
 from .types import CNABInvalidTypeError
 
+from .especie import CNABInvalidEspecieTituloError
+
 __all__ = [
     'CNABFieldValueRequiredError',
     'CNABFieldNotIntegerError',
@@ -18,4 +20,6 @@ __all__ = [
     'IsNotValidDateTimeError',
 
     'CNABInvalidTypeError',
+
+    'CNABInvalidEspecieTituloError',
 ]
