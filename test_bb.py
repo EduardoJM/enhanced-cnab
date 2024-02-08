@@ -1,5 +1,6 @@
 from datetime import date
 from cnab.banks.banco_brasil import CNAB240BancoBrasil
+from cnab.core.especie import EspecieTitulo
 
 cnab = CNAB240BancoBrasil(
     tipo_inscricao="1",  # 1 para cpf, 2 cnpj
@@ -34,7 +35,7 @@ cobranca = lote.inserir_detalhe(
     data_vencimento=date(2018, 4, 30),  # informar a data neste formato AAAA-MM-DD
     valor="5.00",  # Valor do boleto como float valido em php
     cod_emissao_boleto="2",  # tipo de emissao do boleto informar 2 para emissao pelo beneficiario e 1 para emissao pelo banco
-    especie_titulo=1,#"DM",  # informar dm e sera convertido para codigo em qualquer laytou conferir em especie.php
+    especie_titulo=EspecieTitulo.DuplicataMercantil,
     data_emissao=date(2018, 4, 5),  # informar a data neste formato AAAA-MM-DD
     codigo_juros="2",  # Taxa por mês,
     data_juros=date(2018, 4, 30),  # data dos juros, mesma do vencimento
