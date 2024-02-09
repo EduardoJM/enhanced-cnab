@@ -242,5 +242,7 @@ class Santander240Registro3P(CNAB240Registro3):
     
     def get_nosso_numero(self):
         num = str(self._data.get('nosso_numero'))
+        if num == "0" or num == " ":
+            return num
         return num + str(compute_check_digit(num))
 
