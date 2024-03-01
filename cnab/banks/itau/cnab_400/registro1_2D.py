@@ -192,7 +192,7 @@ class ItauCnab400Registro1_2D(CNAB400Registro1):
 
     def __init__(self, header: Optional[Registro], parent: Optional[Registro], **kwargs: dict):
         super().__init__(header, parent, **kwargs)
-        self.inserir_multa(kwargs)
+        self.inserir_multa(**kwargs)
 
     def inserir_multa(self, **kwargs: dict):
         if not kwargs.get('data_multa'):

@@ -29,3 +29,22 @@ class CNAB400Registro1(RegistroRemessa):
         super().append(child)
 
         self.counter += 1
+
+    def get_tipo_inscricao_empresa(self):
+        return self.get_data_or_parent('tipo_inscricao_empresa')
+    
+    def get_numero_inscricao_empresa(self):
+        return self.get_data_or_parent('numero_inscricao_empresa')
+    
+    def get_agencia(self):
+        return self.get_data_or_parent('agencia')
+
+    def get_conta(self):
+        return self.get_data_or_parent('conta')
+
+    def get_conta_dv(self):
+        return self.get_data_or_parent('conta_dv')
+    
+    def get_data_emissao(self):
+        return datetime.now()
+    

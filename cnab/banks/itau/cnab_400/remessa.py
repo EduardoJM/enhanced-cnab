@@ -5,8 +5,8 @@ from .registro0 import ItauCnab400Registro0
 from .registro9 import ItauCnab400Registro9
 
 if TYPE_CHECKING:
-    from .registro1 import ItauCnab400Registro1
-
+    from .registro0 import ItauCnab400Registro0
+#
 class CNAB400Itau(Remessa):
     header: ItauCnab400Registro0
     registro0_class = ItauCnab400Registro0
@@ -15,5 +15,5 @@ class CNAB400Itau(Remessa):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
-    def inserir_lote(self, **kwargs) -> "ItauCnab400Registro1":
+    def inserir_lote(self, **kwargs) -> "ItauCnab400Registro0":
         return super().inserir_lote(**kwargs)

@@ -63,6 +63,18 @@ class ItauCnab400Registro0(CNAB400Registro0):
         ),
     }
 
+    def inserir_detalhe(self, **kwargs):
+        if not kwargs.get('data_desconto2'):
+            from .registro1 import ItauCnab400Registro1
+            item = ItauCnab400Registro1(self, self, **kwargs)
+            self.append(item)
+            return item
+        
+        from .registro1_2D import ItauCnab400Registro1_2D
+        item = ItauCnab400Registro1_2D(self, self, **kwargs)
+        self.append(item)
+        return item
+
     """
     public function inserirDetalhe($data)
     {
