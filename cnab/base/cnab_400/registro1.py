@@ -48,3 +48,5 @@ class CNAB400Registro1(RegistroRemessa):
     def get_data_emissao(self):
         return datetime.now()
     
+    def get_numero_registro(self):
+        return self.get_data_or_parent('numero_sequencial')
