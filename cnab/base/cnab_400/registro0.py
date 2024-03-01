@@ -22,6 +22,9 @@ class CNAB400Registro0(RegistroRemessa):
     def append(self, child: Registro):
         super().append(child)
         self.counter += 1
+    
+    def get_data_gravacao(self):
+        return datetime.now()
 
     def inserir_lote(self, **kwargs: dict) -> CNAB400Registro1:
         if not hasattr(self, 'registro1_class'):
