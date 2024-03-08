@@ -202,13 +202,9 @@ class BancoBrasil240Registro3P(CNAB240Registro3):
             kwargs['tipo_impressao'] = 2
             BancoBrasil240Registro3S1e2(self.header, self, self.lote, **kwargs)
 
-        if kwargs.get('mensagem'):
-            mensagem = str(kwargs.get('mensagem'))
-            lines = mensagem.splitlines()
-            if len(lines) < 4:
-                return
-            
-            BancoBrasil240Registro3S3(self.header, self, self.lote, **kwargs)
+        if not kwargs.get('mensagem_5') and not kwargs.get('mensagem_6') and not kwargs.get('mensagem_7') and not kwargs.get('mensagem_8'):
+            return
+        BancoBrasil240Registro3S3(self.header, self, self.lote, **kwargs)
 
     def __init__(
         self,
