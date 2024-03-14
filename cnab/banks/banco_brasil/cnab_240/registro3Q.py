@@ -69,7 +69,7 @@ class BancoBrasil240Registro3Q(CNAB240Registro3):
             length=40, default=" ", validation=CNABFieldType.Alfa, required=True
         ),
         "codigo_banco_correspondente": CNABField(  # 18.3Q
-            length=3, default="0", validation=CNABFieldType.Alfa, required=True
+            length=3, default="0", validation=CNABFieldType.Int, required=True
         ),
         "nosso_numero_banco_correspondente": CNABField(  # 19.3Q   Campo de preenchimento obrigatório; preencher com Seu Número de controle do título
             length=20,
