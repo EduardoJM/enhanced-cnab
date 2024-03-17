@@ -14,7 +14,7 @@ class ItauCnab400Registro2(CNAB400Registro2):
             length=8, default="0", validation=CNABFieldType.Date, required=True
         ),
         "vlr_multa": CNABField(  # 29.3P
-            length=13,
+            length=11,
             default="0",
             validation=CNABFieldType.Decimal,
             precision=2,
