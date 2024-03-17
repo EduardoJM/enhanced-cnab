@@ -11,7 +11,6 @@ cnab = CNAB400Bradesco(
     numero_sequencial_arquivo="1",
 )
 
-"""
 lote = cnab.inserir_lote()
 
 lote.inserir_detalhe(
@@ -29,8 +28,7 @@ lote.inserir_detalhe(
     cidade_pagador="Anápolis",
     uf_pagador="GO",
 )
-"""
 
-lines = cnab.get_text()
+lines = [*cnab.get_text(), ""]
 with open("bradesco.rem", "w") as f:
     f.write("\r\n".join(lines))
