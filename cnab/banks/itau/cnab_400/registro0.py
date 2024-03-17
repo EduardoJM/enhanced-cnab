@@ -64,20 +64,5 @@ class ItauCnab400Registro0(CNAB400Registro0):
     }
 
     def inserir_detalhe(self, **kwargs):
-        if not kwargs.get('data_desconto2'):
-            from .registro1 import ItauCnab400Registro1
-            return ItauCnab400Registro1(self, self, **kwargs)
-
-    """
-    public function inserirDetalhe($data)
-    {
-        if (array_key_exists('data_desconto2', $data)) {
-
-            $class = 'CnabPHP\resources\\B' . RemessaAbstract::$banco . '\remessa\\' . RemessaAbstract::$layout . '\Registro1_2D';
-            $this->children[] = new $class($data);
-        } else {
-            $class = 'CnabPHP\resources\\B' . RemessaAbstract::$banco . '\remessa\\' . RemessaAbstract::$layout . '\Registro1';
-            $this->children[] = new $class($data);
-        }
-    }
-    """
+        from .registro1 import ItauCnab400Registro1
+        return ItauCnab400Registro1(self, self, **kwargs)
