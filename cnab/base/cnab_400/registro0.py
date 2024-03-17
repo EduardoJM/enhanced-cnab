@@ -5,7 +5,7 @@ from .registro1 import CNAB400Registro1
 
 class CNAB400Registro0(RegistroRemessa):
     def __init__(self, **kwargs: dict):
-        self.counter = 0
+        self.counter = 1
         super().__init__(None, None, **kwargs)
 
     def get_data_geracao(self):
