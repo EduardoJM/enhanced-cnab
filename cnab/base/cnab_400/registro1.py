@@ -4,6 +4,7 @@ from cnab.base.registro_remessa import RegistroRemessa
 from cnab.base.registro import Registro
 from cnab.core.enums import TipoServico, TipoInscricao
 from cnab.core.exceptions import CNABInvalidTypeError
+from cnab.core.especie import EspecieTitulo
 
 class CNAB400Registro1(RegistroRemessa):
     def __init__(self, header: Optional["Registro"], parent: Optional["Registro"], **kwargs: dict):
@@ -40,3 +41,11 @@ class CNAB400Registro1(RegistroRemessa):
     
     def get_numero_registro(self):
         return self.get_data_or_parent('numero_sequencial')
+
+    def get_especie_titulo(self):
+        field = self.get_field('codigo_banco')
+        return EspecieTitulo.get_real_value(
+            field.default,
+            self._data.get('especie_titulo')
+        )
+    
