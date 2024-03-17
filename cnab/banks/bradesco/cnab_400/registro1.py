@@ -256,7 +256,7 @@ class BradescoCnab400Registro1(CNAB400Registro1):
             required=True),
     }
 
-    def __init__(self, header: Registro | None, parent: Registro | None, **kwargs: dict):
+    def __init__(self, header: Optional[Registro], parent: Optional[Registro], **kwargs: dict):
         super().__init__(header, parent, **kwargs)
 
     def inserir_mensagem(self, **kwargs):
