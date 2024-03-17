@@ -67,9 +67,6 @@ class ItauCnab400Registro0(CNAB400Registro0):
         if not kwargs.get('data_desconto2'):
             from .registro1 import ItauCnab400Registro1
             return ItauCnab400Registro1(self, self, **kwargs)
-        
-        from .registro1_2D import ItauCnab400Registro1_2D
-        return ItauCnab400Registro1_2D(self, self, **kwargs)
 
     """
     public function inserirDetalhe($data)
