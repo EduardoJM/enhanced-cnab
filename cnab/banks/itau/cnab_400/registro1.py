@@ -3,6 +3,7 @@ from cnab.base.cnab_400 import CNAB400Registro1
 from cnab.core.field import CNABField, CNABFieldType
 from cnab.utils.dict_utils import set_if_has_value
 from cnab.base.registro import Registro
+from .registro2 import ItauCnab400Registro2
 
 
 class ItauCnab400Registro1(CNAB400Registro1):
@@ -62,9 +63,9 @@ class ItauCnab400Registro1(CNAB400Registro1):
             validation=CNABFieldType.Int,
             required=True,
         ),
-        "numero_documento": CNABField(  # codigo da ocorrencia no manual itau
+        "numero_documento": CNABField(
             length=10,
-            default=" ",  # entrada de titulo
+            default=" ",
             validation=CNABFieldType.Alfa,
             required=True,
         ),
@@ -187,5 +188,4 @@ class ItauCnab400Registro1(CNAB400Registro1):
     def inserir_multa(self, **kwargs: dict):
         if not kwargs.get('data_multa'):
             return
-        #$class = 'CnabPHP\resources\\' . RemessaAbstract::$banco . '\remessa\\' . RemessaAbstract::$layout . '\Registro2';
-        #$this->children[] = new $class($data);
+        ItauCnab400Registro2(self.header, self, **kwargs)
