@@ -8,7 +8,7 @@ f.close()
 
 setup(
     name='enhanced-cnab',
-    version='0.0.6',
+    version='0.0.7',
     description='Enhanced way to generate brazil banks CNAB files in python.',
     long_description=readme,
     long_description_content_type='text/markdown',
