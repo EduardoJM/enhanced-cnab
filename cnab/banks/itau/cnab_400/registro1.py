@@ -189,6 +189,3 @@ class ItauCnab400Registro1(CNAB400Registro1):
         if not kwargs.get('data_multa'):
             return
         ItauCnab400Registro2(self.header, self, **kwargs)
-
-    def get_agencia_cobradora(self):
-        return self.get_data_or_parent('agencia')
