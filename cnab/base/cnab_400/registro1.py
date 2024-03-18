@@ -8,7 +8,6 @@ from cnab.core.especie import EspecieTitulo
 
 class CNAB400Registro1(RegistroRemessa):
     def __init__(self, header: Optional["Registro"], parent: Optional["Registro"], **kwargs: dict):
-        self.counter = 0
         super().__init__(header, parent, **kwargs)
         self.init_numero_registro()
 
@@ -19,7 +18,7 @@ class CNAB400Registro1(RegistroRemessa):
     def append(self, child: Registro):
         super().append(child)
 
-        self.counter += 1
+        self.header.counter += 1
 
     def get_tipo_inscricao_empresa(self):
         return self.get_data_or_parent('tipo_inscricao_empresa')

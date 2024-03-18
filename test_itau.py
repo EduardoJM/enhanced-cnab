@@ -16,6 +16,7 @@ lote.inserir_detalhe(
     numero_inscricao_empresa="39845082000100",
     nosso_numero="1800001",
     data_vencimento=date(2018, 4, 5),
+    data_multa=date(2018, 4, 5),
     valor=450.40,
     tipo_inscricao="1",
     numero_inscricao="70116028106",
