@@ -75,7 +75,8 @@ class CNAB240Registro1(RegistroRemessa):
 
         retorno = ''
         for key, field in self._meta.items():
-            retorno += self.get_value(key, field.default)
+            default = self.get_default(field)
+            retorno += self.get_value(key, default)
 
         result = [retorno]
 
