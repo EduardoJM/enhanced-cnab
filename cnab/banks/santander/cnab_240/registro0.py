@@ -1,5 +1,9 @@
 from cnab.base.cnab_240 import CNAB240Registro0
-from cnab.core.field import CNABField, CNABFieldType
+from cnab.core.field import (
+    CNABField,
+    CNABFieldType,
+    CNABCreatedDateField,
+)
 from .registro1 import Santander240Registro1
 
 class Santander240Registro0(CNAB240Registro0):
@@ -95,9 +99,8 @@ class Santander240Registro0(CNAB240Registro0):
             validation=CNABFieldType.Int,
             required=True,
         ),
-        "data_geracao": CNABField(
+        "data_geracao": CNABCreatedDateField(
             length=8,
-            default="",
             validation=CNABFieldType.Date,
             required=True,
         ),

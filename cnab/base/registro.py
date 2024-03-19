@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import List, Optional
+from typing import List, Optional, Callable
 from cnab.core.field import CNABField
 from cnab.core import exceptions
 
@@ -37,7 +37,16 @@ class Registro(ABC):
         if not value:
             value = self._data.get(key, default)
         return value
-
+    
+    def get_default(self, field: CNABField):
+        if not field.default:
+            return field.default
+        
+        if isinstance(field.default, Callable):
+            return field.default()
+        
+        return field.default
+    
     def get_value(self, key, default=None):
         value = self.get_unformated(key, default)
         field = self.get_field(key)

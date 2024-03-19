@@ -1,4 +1,4 @@
-from typing import Union, List, Optional
+from typing import Union, List, Optional, Callable
 from decimal import Decimal
 from datetime import date, time, datetime
 from enum import Enum
@@ -22,7 +22,7 @@ class CNABField:
     name: str = ''
     length: int = 0
     validation: CNABFieldType
-    default: CNABFieldValueType
+    default: Union[CNABFieldValueType, Callable[[], CNABFieldValueType]]
     required: bool
     validators: List = []
     precision: int = 0
@@ -32,7 +32,7 @@ class CNABField:
         self,
         length: int,
         validation: CNABFieldType,
-        default: CNABFieldValueType,
+        default: Union[CNABFieldValueType, Callable[[], CNABFieldValueType]],
         required: Optional[bool] = False,
         precision: Optional[int] = 2,
     ):
@@ -80,3 +80,19 @@ class CNABField:
     def format_value(self, value: CNABFieldValueType):
         value = self.validate_value(value)
         return self.formatter(value, self)
+
+class CNABCreatedDateField(CNABField):
+    def __init__(
+        self,
+        length: int,
+        validation: CNABFieldType,
+        required: Optional[bool] = False,
+        precision: Optional[int] = 2,
+    ):
+        super().__init__(
+            length=length,
+            validation=validation,
+            required=required,
+            precision=precision,
+            default=lambda: datetime.now()
+        )
