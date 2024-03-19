@@ -55,9 +55,6 @@ class CNAB240Registro1(RegistroRemessa):
     def get_numero_remessa(self):
         return self.get_data_or_parent('numero_sequencial_arquivo')
     
-    def get_data_gravacao(self):
-        return datetime.now()
-
     def get_codigo_beneficiario(self):
         return self.get_data_or_parent('codigo_beneficiario')
     

@@ -80,3 +80,19 @@ class CNABField:
     def format_value(self, value: CNABFieldValueType):
         value = self.validate_value(value)
         return self.formatter(value, self)
+
+class CNABCreatedDateField(CNABField):
+    def __init__(
+        self,
+        length: int,
+        validation: CNABFieldType,
+        required: Optional[bool] = False,
+        precision: Optional[int] = 2,
+    ):
+        super().__init__(
+            length=length,
+            validation=validation,
+            required=required,
+            precision=precision,
+            default=lambda: datetime.now()
+        )

@@ -1,6 +1,6 @@
 from typing import Optional, Union
 from cnab.base.cnab_400 import CNAB400Registro0
-from cnab.core.field import CNABField, CNABFieldType
+from cnab.core.field import CNABField, CNABCreatedDateField, CNABFieldType
 from cnab.utils.dict_utils import set_if_has_value
 
 
@@ -51,9 +51,8 @@ class BradescoCnab400Registro0(CNAB400Registro0):
             default='Bradesco',
             validation=CNABFieldType.Alfa,
             required=True),
-        'data_gravacao': CNABField(
+        'data_gravacao': CNABCreatedDateField(
             length=6,
-            default='',# nao informar a data na instanciação - gerada dinamicamente
             validation=CNABFieldType.Date,
             required=True),
         'filler1': CNABField(

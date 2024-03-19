@@ -1,6 +1,5 @@
 from cnab.base.registro import Registro
 from cnab.base.registro_remessa import RegistroRemessa
-from datetime import datetime
 from .registro1 import CNAB240Registro1
 
 class CNAB240Registro0(RegistroRemessa):
@@ -13,12 +12,6 @@ class CNAB240Registro0(RegistroRemessa):
         self.counter = 0
         super().__init__(None, None, **kwargs)
 
-    def get_data_geracao(self):
-        return datetime.now()
-    
-    def get_hora_geracao(self):
-        return datetime.now()
-    
     def append(self, child: Registro):
         super().append(child)
         self.counter += 1

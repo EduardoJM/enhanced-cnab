@@ -1,6 +1,10 @@
 from typing import Optional, Union
 from cnab.base.cnab_240 import CNAB240Registro0
-from cnab.core.field import CNABField, CNABFieldType
+from cnab.core.field import (
+    CNABField,
+    CNABFieldType,
+    CNABCreatedDateField,
+)
 from cnab.utils.dict_utils import set_if_has_value
 from .registro1 import BancoBrasil240Registro1
 
@@ -70,15 +74,13 @@ class BancoBrasil240Registro0(CNAB240Registro0):
         "codigo_remessa": CNABField(  # 16.0
             length=1, default="1", validation=CNABFieldType.Int, required=True
         ),
-        "data_geracao": CNABField(  # 17.0
+        "data_geracao": CNABCreatedDateField(  # 17.0
             length=8,
-            default="",  # nao informar a data na instanciaÃ§Ã£o - gerada dinamicamente
             validation=CNABFieldType.Date,
             required=True,
         ),
-        "hora_geracao": CNABField(  # 18.00
+        "hora_geracao": CNABCreatedDateField(  # 18.00
             length=6,
-            default="",  # nao informar a data na instanciaÃ§Ã£o - gerada dinamicamente
             validation=CNABFieldType.Time,
             required=True,
         ),
