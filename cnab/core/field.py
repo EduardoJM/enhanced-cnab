@@ -1,4 +1,4 @@
-from typing import Union, List, Optional
+from typing import Union, List, Optional, Callable
 from decimal import Decimal
 from datetime import date, time, datetime
 from enum import Enum
@@ -22,7 +22,7 @@ class CNABField:
     name: str = ''
     length: int = 0
     validation: CNABFieldType
-    default: CNABFieldValueType
+    default: Union[CNABFieldValueType, Callable[[], CNABFieldValueType]]
     required: bool
     validators: List = []
     precision: int = 0
@@ -32,7 +32,7 @@ class CNABField:
         self,
         length: int,
         validation: CNABFieldType,
-        default: CNABFieldValueType,
+        default: Union[CNABFieldValueType, Callable[[], CNABFieldValueType]],
         required: Optional[bool] = False,
         precision: Optional[int] = 2,
     ):
