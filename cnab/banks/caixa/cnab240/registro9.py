@@ -2,7 +2,7 @@ from cnab.base.cnab_240 import CNAB240Registro9
 from cnab.core.field import CNABField, CNABFieldType
 
 
-class BancoBrasil240Registro9(CNAB240Registro9):
+class Caixa240Registro9(CNAB240Registro9):
     _meta = {
         'codigo_banco':CNABField(      #01.5
 			length=3,
@@ -36,8 +36,8 @@ class BancoBrasil240Registro9(CNAB240Registro9):
 			required=True),
 		'filler2':CNABField(        #07.5
 			length=6,
-			default='0',
-			validation=CNABFieldType.Int,
+			default=' ',
+			validation=CNABFieldType.Alfa,
 			required=True),
 		'filler3':CNABField(           #08.5
 			length=205,
