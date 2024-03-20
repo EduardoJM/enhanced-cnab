@@ -33,13 +33,19 @@ class CNABField:
     
     registro: Optional["RegistroRemessa"] = None
 
+    def get_real_length(self):
+        # TODO: document here or change this?
+        if self.validation == CNABFieldType.Decimal:
+            return self.length + self.precision
+        return self.length
+
     def __init__(
         self,
         length: int,
         validation: CNABFieldType,
         default: Union[CNABFieldValueType, Callable[[], CNABFieldValueType]],
         required: Optional[bool] = False,
-        precision: Optional[int] = 2,
+        precision: Optional[int] = 0,
     ):
         self.length = length
         self.validation = validation
