@@ -123,3 +123,7 @@ class Caixa240Registro1(CNAB240Registro1):
 			validation = CNABFieldType.Alfa,
 			required = True),
     }
+
+    def inserir_detalhe(self, **kwargs):
+        from .registro3P import Caixa240Registro3P
+        return Caixa240Registro3P(self.header, self, self, **kwargs)
