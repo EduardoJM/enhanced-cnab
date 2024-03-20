@@ -54,7 +54,7 @@ class Caixa240Registro3P(CNAB240Registro3):
             length=1, default="0", validation=CNABFieldType.Int, required=True
         ),
         "nosso_numero": CNABField(  # 13.3P
-            length=17, default=" ", validation=CNABFieldType.Alfa, required=True
+            length=17, default="0", validation=CNABFieldType.Int, required=True
         ),
         "codigo_carteira": CNABField(  # 14.3P
             length=1, default="0", validation=CNABFieldType.Int, required=True

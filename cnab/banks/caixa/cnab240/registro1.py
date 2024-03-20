@@ -63,7 +63,7 @@ class Caixa240Registro1(CNAB240Registro1):
         'filler3': CNABField( # 11.1A
 			length=13,
 			default='0',
-			validation=CNABFieldType.Alfa,
+			validation=CNABFieldType.Int,
 			required=True),
 		'agencia': CNABField(#12.1
 			length=5,
