@@ -123,7 +123,34 @@ class Caixa240Registro1(CNAB240Registro1):
 			validation = CNABFieldType.Alfa,
 			required = True),
     }
-
+    
     def inserir_detalhe(self, **kwargs):
         from .registro3P import Caixa240Registro3P
         return Caixa240Registro3P(self.header, self, self, **kwargs)
+
+    def get_versao_layout(self):
+        if self._data.get('versao_layout'):
+            return self._data.get('versao_layout')
+
+        codigo_beneficiario = self.get_data_or_parent('codigo_beneficiario')
+        if len(codigo_beneficiario) > 6:
+            return '067'
+        return '060'
+    
+    def get_codigo_beneficiario_6(self):
+        if self._data.get('codigo_beneficiario_6'):
+            return self._data.get('codigo_beneficiario_6')
+        codigo_beneficiario = self.get_data_or_parent('codigo_beneficiario')
+        if len(codigo_beneficiario) == 6:
+            return codigo_beneficiario
+        return "000000"
+
+    def get_codigo_beneficiario(self):
+        codigo_beneficiario = self.get_data_or_parent('codigo_beneficiario')
+        versao_layout = self.get_versao_layout()
+        if versao_layout == '060':
+            code = str(codigo_beneficiario).rjust(6, '0')
+            return f"{code}0"
+        if versao_layout == '067':
+            return str(codigo_beneficiario).rjust(7, '0')
+		# TODO: raise exception here

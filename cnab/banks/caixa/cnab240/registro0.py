@@ -92,3 +92,22 @@ class Caixa240Registro0(CNAB240Registro0):
             length=25, default=" ", validation=CNABFieldType.Alfa, required=True
         ),
     }
+
+    def get_versao_layout(self):
+        if self._data.get('versao_layout'):
+            return self._data.get('versao_layout')
+
+        codigo_beneficiario = self._data.get('codigo_beneficiario')
+        if len(codigo_beneficiario) > 6:
+            return '107'
+        return '101'
+    
+    def get_codigo_beneficiario(self):
+        codigo_beneficiario = self._data.get('codigo_beneficiario')
+        versao_layout = self.get_versao_layout()
+        if versao_layout == '101':
+            code = str(codigo_beneficiario).rjust(6, '0')
+            return f"{code}0"
+        if versao_layout == '107':
+            return str(codigo_beneficiario).rjust(7, '0')
+        # TODO: raise exception here
