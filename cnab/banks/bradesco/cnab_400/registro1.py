@@ -234,7 +234,7 @@ class BradescoCnab400Registro1(CNAB400Registro1):
             default='',
             validation=CNABFieldType.Alfa,
             required=True),
-        '1_mensagem': CNABField(
+        'mensagem1': CNABField(
             length=12,
             default=' ',
             validation=CNABFieldType.Alfa,
@@ -244,7 +244,7 @@ class BradescoCnab400Registro1(CNAB400Registro1):
             default='',
             validation=CNABFieldType.Int,
             required=True),
-        '2_mensagem': CNABField(
+        'mensagem2': CNABField(
             length=60,
             default=' ',
             validation=CNABFieldType.Alfa,
