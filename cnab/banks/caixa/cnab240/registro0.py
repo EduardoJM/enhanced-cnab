@@ -45,7 +45,7 @@ class Caixa240Registro0(CNAB240Registro0):
             length=7, default="", validation=CNABFieldType.Int, required=True 
         ),
         "filler3": CNABField(  # 11.0/12.0
-            length=7, default=" ", validation=CNABFieldType.Alfa, required=True
+            length=7, default="0", validation=CNABFieldType.Int, required=True
         ),
         "nome_empresa": CNABField(  # 13.0
             length=30, default="", validation=CNABFieldType.Alfa, required=True
@@ -86,6 +86,9 @@ class Caixa240Registro0(CNAB240Registro0):
             length=20, default=" ", validation=CNABFieldType.Alfa, required=True
         ),
         "filler6": CNABField(  # 24.0
+            length=4, default=" ", validation=CNABFieldType.Alfa, required=True
+        ),
+        "filler7": CNABField(  # 25.0
             length=25, default=" ", validation=CNABFieldType.Alfa, required=True
         ),
     }
