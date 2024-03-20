@@ -19,7 +19,6 @@ cnab = CNAB240Caixa(
 lote = cnab.inserir_lote()
 cobranca = lote.inserir_detalhe(
     # Registro 3P Dados do Boleto
-    nosso_numero="1800001",  # numero sequencial de boleto
     # Consulte a pág. 9 da documentação para mais informações sobre o nosso número
     #'nosso_numero_dv'   =	1, # pode ser informado ou calculado pelo sistema
     parcela="01",
@@ -33,6 +32,7 @@ cobranca = lote.inserir_detalhe(
     emissao_boleto=2,  # tipo de emissao do boleto informar 2 para emissao pelo beneficiario e 1 para emissao pelo banco
     carteira="17",  # codigo da carteira
     seu_numero="DEV180001",  # se nao informado usarei o nosso numero
+    seu_numero2="DEV180001",  # se nao informado usarei o nosso numero
     data_vencimento=date(2018, 4, 30),  # informar a data neste formato AAAA-MM-DD
     valor="5.00",  # Valor do boleto como float valido em php
     cod_emissao_boleto="2",  # tipo de emissao do boleto informar 2 para emissao pelo beneficiario e 1 para emissao pelo banco
@@ -69,7 +69,7 @@ cobranca = lote.inserir_detalhe(
     mensagem_fixa2="Não conceder desconto",
     mensagem_3="Sujeito a protesto após o vencimento",
     mensagem_4="VelvetTux Soluções em Sistemas <('')",
-    codigo_banco_correspondente="001",
+    baixar="2",
 )
 
 lines = cnab.get_text()
