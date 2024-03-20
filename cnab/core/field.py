@@ -1,8 +1,11 @@
-from typing import Union, List, Optional, Callable
+from typing import Union, List, Optional, Callable, TYPE_CHECKING
 from decimal import Decimal
 from datetime import date, time, datetime
 from enum import Enum
 from . import validators, formatter, exceptions
+
+if TYPE_CHECKING:
+    from cnab.base.registro_remessa import RegistroRemessa
 
 class CNABFieldType(Enum):
     Decimal = 'decimal'
@@ -27,6 +30,8 @@ class CNABField:
     validators: List = []
     precision: int = 0
     formatter = None
+    
+    registro: Optional["RegistroRemessa"] = None
 
     def __init__(
         self,
@@ -42,6 +47,8 @@ class CNABField:
         self.required = required
         self.precision = precision
         self.formatter = None
+
+        self.registro = None
 
         self.validators = []
         if self.required:
