@@ -1,7 +1,9 @@
-from cnab.base.retorno import RegistroRetorno
+from cnab.base.retorno.CNAB400 import Registro0Retorno
 from cnab.core.field import CNABField, CNABFieldType
+from .registro1 import ItauRetornoCnab400Registro1
 
-class ItauRetornoCnab400Registro0(RegistroRetorno):
+class ItauRetornoCnab400Registro0(Registro0Retorno):
+    registro1_class = ItauRetornoCnab400Registro1
     _meta = {
         'tipo_registro': CNABField(
             length=1,
