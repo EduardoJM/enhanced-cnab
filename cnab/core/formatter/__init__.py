@@ -1,15 +1,15 @@
-from .decimal import format_decimal
-from .alfa import format_alfa
-from .alfa2 import format_alfa2
-from .integer import format_integer
-from .date import format_date
-from .time import format_time
+from .decimal import FormatterDecimal
+from .alfa import FormatterAlfa
+from .alfa2 import FormatterAlfa2
+from .integer import FormatterInteger
+from .date import FormatterDate
+from .time import FormatterTime
 
 __all__ = [
-    'format_decimal',
-    'format_alfa',
-    'format_alfa2',
-    'format_integer',
-    'format_date',
-    'format_time',
+    'FormatterDecimal',
+    'FormatterAlfa',
+    'FormatterAlfa2',
+    'FormatterInteger',
+    'FormatterDate',
+    'FormatterTime',
 ]

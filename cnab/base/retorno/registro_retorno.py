@@ -18,6 +18,7 @@ class RegistroRetorno (ABC):
     
     def _parse_field(self, key: str, field: CNABField):
         value = self._get_field_value(field)
+        value = field.value_from_file(value)
         setattr(self, key, value)
 
     def _parse_line(self):

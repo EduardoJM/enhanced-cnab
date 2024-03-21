@@ -62,25 +62,25 @@ class CNABField:
         
         if self.validation == CNABFieldType.Int:
             self.validators += [validators.validate_integer]
-            self.formatter = formatter.format_integer
+            self.formatter = formatter.FormatterInteger(self)
 
         if self.validation == CNABFieldType.Decimal:
             self.validators += [validators.validate_decimal]
-            self.formatter = formatter.format_decimal
+            self.formatter = formatter.FormatterDecimal(self)
 
         if self.validation == CNABFieldType.Alfa:
-            self.formatter = formatter.format_alfa
+            self.formatter = formatter.FormatterAlfa(self)
             
         if self.validation == CNABFieldType.Alfa2:
-            self.formatter = formatter.format_alfa2
+            self.formatter = formatter.FormatterAlfa2(self)
 
         if self.validation == CNABFieldType.Date:
             self.validators += [validators.validate_date]
-            self.formatter = formatter.format_date
+            self.formatter = formatter.FormatterDate(self)
 
         if self.validation == CNABFieldType.Time:
             self.validators += [validators.validate_date]
-            self.formatter = formatter.format_time
+            self.formatter = formatter.FormatterTime(self)
 
         if not self.formatter:
             raise exceptions.CNABFieldTypeNotSupportedError(self.validation)
@@ -92,7 +92,10 @@ class CNABField:
 
     def format_value(self, value: CNABFieldValueType):
         value = self.validate_value(value)
-        return self.formatter(value, self)
+        return self.formatter.to_file(value)
+    
+    def value_from_file(self, value: str) -> CNABFieldValueType:
+        return self.formatter.from_file(value)
 
 class CNABCreatedDateField(CNABField):
     def __init__(
