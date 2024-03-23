@@ -42,7 +42,7 @@ class CNAB400Registro1(RegistroRemessa):
         return self.get_data_or_parent('numero_sequencial')
 
     def get_especie_titulo(self):
-        field = self.get_field('codigo_banco')
+        field = self.header.get_field('codigo_banco')
         return EspecieTitulo.get_real_value(
             field.default,
             self._data.get('especie_titulo')

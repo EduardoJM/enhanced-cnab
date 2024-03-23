@@ -27,6 +27,7 @@ lote.inserir_detalhe(
     cep_pagador="75140430",
     cidade_pagador="Anápolis",
     uf_pagador="GO",
+    especie_titulo=EspecieTitulo.DuplicataMercantil
 )
 
 lines = [*cnab.get_text(), ""]
