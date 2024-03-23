@@ -1,9 +1,10 @@
-from abc import ABC, abstractmethod
+from abc import abstractmethod
 from typing import List, Optional, Callable
 from cnab.core.field import CNABField
+from cnab.core.registro import RegistroBase
 from cnab.core import exceptions
 
-class Registro(ABC):
+class Registro(RegistroBase):
     parent: Optional["Registro"] = None
     header: Optional["Registro"] = None
 
@@ -16,6 +17,7 @@ class Registro(ABC):
         self._children = []
         self.parent = parent
         self._data = kwargs
+        self.__dict__.update(self._data)
         
         if not parent:
             return
@@ -39,6 +41,9 @@ class Registro(ABC):
         return value
     
     def get_default(self, field: CNABField):
+        print(field)
+        print(field.default)
+
         if not field.default:
             return field.default
         
@@ -50,6 +55,10 @@ class Registro(ABC):
     def get_value(self, key, default=None):
         value = self.get_unformated(key, default)
         field = self.get_field(key)
+        print("@@@@@@@@@@@@@@@@")
+        print(key)
+        print(default)
+        print(value)
         return field.format_value(value)
     
     def get_data_or_parent(self, field: str):

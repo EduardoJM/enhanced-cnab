@@ -1,66 +1,27 @@
-from typing import Optional, Union
 from cnab.base.cnab_400 import CNAB400Registro0
-from cnab.core.field import CNABCreatedDateField, CNABField, CNABFieldType
-from cnab.utils.dict_utils import set_if_has_value
-# from .registro1 import BancoBrasil240Registro1
-
+from cnab.core.field import (
+    CNABCreatedDateField,
+    CNABFieldInteger,
+    CNABFieldAlfa,
+)
 
 class ItauCnab400Registro0(CNAB400Registro0):
-    _meta = {
-        "tipo_registro": CNABField(
-            length=1, default="0", validation=CNABFieldType.Int, required=True
-        ),
-        "operacao": CNABField(
-            length=1, default="1", validation=CNABFieldType.Int, required=True
-        ),
-        "literal_remessa": CNABField(
-            length=7, default="remessa", validation=CNABFieldType.Alfa, required=True
-        ),
-        "tipo_servico": CNABField(
-            length=2, default="01", validation=CNABFieldType.Int, required=True
-        ),
-        "literal_servico": CNABField(
-            length=15, default="COBRANCA", validation=CNABFieldType.Alfa, required=True
-        ),
-        "agencia": CNABField(
-            length=4, default="", validation=CNABFieldType.Int, required=True
-        ),
-        "filler1": CNABField(
-            length=2, default="0", validation=CNABFieldType.Int, required=True
-        ),
-        "conta": CNABField(
-            length=5, default="", validation=CNABFieldType.Int, required=True
-        ),
-        "conta_dv": CNABField(
-            length=1, default="", validation=CNABFieldType.Int, required=True
-        ),
-        "filler2": CNABField(
-            length=8, default=" ", validation=CNABFieldType.Alfa, required=True
-        ),
-        "nome_empresa": CNABField(
-            length=30, default=" ", validation=CNABFieldType.Alfa, required=True
-        ),
-        "codigo_banco": CNABField(
-            length=3, default="341", validation=CNABFieldType.Int, required=True
-        ),
-        "nome_banco": CNABField(
-            length=15,
-            default="BANCO ITAU SA",
-            validation=CNABFieldType.Alfa,
-            required=True,
-        ),
-        "data_gravacao": CNABCreatedDateField(
-            length=6,
-            validation=CNABFieldType.Date,
-            required=True,
-        ),
-        "filler3": CNABField(
-            length=294, default=" ", validation=CNABFieldType.Alfa, required=True
-        ),
-        "numero_sequencial": CNABField(
-            length=6, default="1", validation=CNABFieldType.Int, required=True
-        ),
-    }
+    tipo_registro = CNABFieldInteger("001-002", length=1, default="0", required=True)
+    operacao = CNABFieldInteger("002-002", length=1, default="1", required=True)
+    literal_remessa = CNABFieldAlfa("003-009", length=7, default="remessa", required=True)
+    tipo_servico = CNABFieldInteger("010-011", length=2, default="01", required=True)
+    literal_servico = CNABFieldAlfa("012-026", length=15, default="COBRANCA", required=True)
+    agencia = CNABFieldInteger("027-030", length=4, default="", required=True)
+    filler1 = CNABFieldInteger("031-032", length=2, default="0", required=True)
+    conta = CNABFieldInteger("033-037", length=5, default="", required=True)
+    conta_dv = CNABFieldInteger("038-038", length=1, default="", required=True)
+    filler2 = CNABFieldAlfa("039-046", length=8, default=" ", required=True)
+    nome_empresa = CNABFieldAlfa("047-076", length=30, default=" ", required=True)
+    codigo_banco = CNABFieldInteger("077-079", length=3, default="341", required=True)
+    nome_banco = CNABFieldAlfa("080-094", length=15, default="BANCO ITAU SA", required=True)
+    data_gravacao = CNABCreatedDateField("095-100", length=6, required=True)
+    filler3 = CNABFieldAlfa("100-394", length=294, default=" ", required=True)
+    numero_sequencial = CNABFieldInteger("395-400", length=6, default="1", required=True)
 
     def inserir_detalhe(self, **kwargs):
         from .registro1 import ItauCnab400Registro1
