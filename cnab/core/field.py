@@ -1,3 +1,4 @@
+from functools import total_ordering
 from typing import Union, List, Optional, Callable, TYPE_CHECKING
 from decimal import Decimal
 from datetime import date, time, datetime
@@ -21,6 +22,7 @@ class CNABFieldValueError(Exception):
 
 CNABFieldValueType = Union[str, date, time, datetime, int, float, Decimal]
 
+@total_ordering
 class CNABField:
     name: str = ''
     length: int = 0
@@ -32,6 +34,8 @@ class CNABField:
     formatter = None
     
     registro: Optional["RegistroRemessa"] = None
+
+    creation_counter = 0
 
     def get_real_length(self):
         # TODO: document here or change this?
@@ -53,6 +57,9 @@ class CNABField:
         self.required = required
         self.precision = precision
         self.formatter = None
+
+        self.creation_counter = CNABField.creation_counter
+        CNABField.creation_counter += 1
 
         self.registro = None
 
@@ -96,6 +103,31 @@ class CNABField:
     
     def value_from_file(self, value: str) -> CNABFieldValueType:
         return self.formatter.from_file(value)
+
+    """
+    def get_data_or_header_data(self):
+        data = self.registro._data
+        if data.get(self.name):
+            return data.get(self.name)
+        if not self.registro.header:
+            return None
+        return self.registro.header._data.get(self.name)
+    """
+
+    def __lt__(self, other):
+        if not isinstance(other, CNABField):
+            raise NotImplementedError
+        return self.creation_counter < other.creation_counter
+    
+    def __eq__(self, other):
+        if not isinstance(other, CNABField):
+            raise NotImplementedError
+        comparations = [
+            self.name == other.name,
+            self.creation_counter == other.creation_counter,
+            self.validation == other.validation
+        ]
+        return all(comparations)
 
 class CNABCreatedDateField(CNABField):
     def __init__(
