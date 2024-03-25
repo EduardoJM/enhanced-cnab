@@ -85,9 +85,6 @@ class CNABField:
         if self.required:
             self.validators += [validators.validate_required]
         
-        print(segment)
-        print(self.formatter)
-
         if not self.formatter:
             raise CNABFieldTypeNotSupportedError()
         
@@ -113,15 +110,12 @@ class CNABField:
         value = None
         
         if hasattr(registro, f'get_{self.name}'):
-            print("Tem fn")
             fn = getattr(registro, f'get_{self.name}')
             # TODO: pass self to fn()
             value = fn()
 
         if not value and hasattr(registro, self.name):
-            print("tem attr")
             value = getattr(registro, self.name)
-            print(value)
 
         return value
     
@@ -144,14 +138,10 @@ class CNABField:
         return value
 
     def get_value(self):
-        print("----")
-        print("Get Value: ", self.name)
         default = self.get_value_default()
-        print("Default: ", default)
         unformated = self.get_value_unformated(self.registro)
         if not unformated:
             unformated = self.get_renamed_value(self.registro)
-        print("Unf: ", unformated)
         return self.format_value(unformated or default)
     
     def value_from_file(self, value: str) -> CNABFieldValueType:

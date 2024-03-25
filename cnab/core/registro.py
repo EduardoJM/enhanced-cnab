@@ -22,6 +22,5 @@ class RegistroBase:
         cnab_fields.sort()
 
         super_new._meta = reduce(_get_cnab_meta, cnab_fields, {})
-        print(super_new._meta)
         
         return super_new

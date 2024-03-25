@@ -79,7 +79,6 @@ class Registro(RegistroBase):
             return None
 
     def get_codigo_carteira(self):
-        print(dir(self))
         if not hasattr(self, 'codigo_carteira'):
             return None
         value = self.codigo_carteira

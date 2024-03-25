@@ -55,7 +55,6 @@ class Caixa240Registro1(CNAB240Registro1):
 	def get_codigo_beneficiario(self):
         # TODO: change this in future
 		versao_layout = self.get_versao_layout()
-		print(self.codigo_beneficiario)
 		if versao_layout == '060':
 			code = str(self.codigo_beneficiario).rjust(6, '0')
 			return f"{code}0"
