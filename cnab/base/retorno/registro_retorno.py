@@ -1,9 +1,9 @@
-from abc import ABC
 from typing import Optional, Dict, List
 from cnab.core.field import CNABField
+from cnab.core.registro import RegistroBase
 from .retorno import Retorno
 
-class RegistroRetorno (ABC):
+class RegistroRetorno (RegistroBase):
     line: str = ''
     position: int = 0
     file: Retorno

@@ -14,11 +14,6 @@ class CNABFieldNotDecimalError(Exception):
         msg = f"The decimal field value is not parseable to float: {field_name}"
         super().__init__(msg)
 
-class CNABFieldTypeNotSupportedError(Exception):
-    def __init__(self, field_type: str):
-        msg = f"The field type {field_type} is not supported."
-        super().__init__(msg)
-
 class IsNotCNABFieldError(Exception):
     def __init__(self, field_name: str):
         msg = f"The meta field is not a CNABField instance: {field_name}"

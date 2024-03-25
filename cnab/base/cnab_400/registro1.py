@@ -2,8 +2,6 @@ from typing import Optional
 from datetime import datetime
 from cnab.base.registro_remessa import RegistroRemessa
 from cnab.base.registro import Registro
-from cnab.core.enums import TipoServico, TipoInscricao
-from cnab.core.exceptions import CNABInvalidTypeError
 from cnab.core.especie import EspecieTitulo
 
 class CNAB400Registro1(RegistroRemessa):
@@ -12,8 +10,8 @@ class CNAB400Registro1(RegistroRemessa):
         self.init_numero_registro()
 
     def init_numero_registro(self):
-        self._data['numero_registro'] = self.header.counter
-        self._data['numero_sequencial'] = self.header.counter
+        self.numero_registro = self.header.counter
+        self.numero_sequencial = self.header.counter
 
     def append(self, child: Registro):
         super().append(child)
@@ -45,6 +43,5 @@ class CNAB400Registro1(RegistroRemessa):
         field = self.header.get_field('codigo_banco')
         return EspecieTitulo.get_real_value(
             field.default,
-            self._data.get('especie_titulo')
+            self.especie_titulo,
         )
-    

@@ -18,8 +18,7 @@ class CNAB240Registro3(RegistroRemessa):
         self.init_numero_registro()
 
     def init_numero_registro(self):
-        self._data['numero_registro'] = self.lote.counter
-        #return self.lote.counter
+        self.numero_registro = self.lote.counter
 
     def get_agencia(self):
         return self.get_data_or_parent('agencia')
@@ -54,23 +53,25 @@ class CNAB240Registro3(RegistroRemessa):
         return cep[-3:]
     
     def get_seu_numero2(self):
-        value = self._data.get('seu_numero2')
+        # TODO: remove this???
+        value = self.seu_numero2
         if value:
             return value
         
         if hasattr(self, 'get_nosso_numero'):
             return self.get_nosso_numero()
         
-        return self._data.get('nosso_numero')
+        return self.nosso_numero
     
     def append(self, child: Registro):
         super().append(child)
         self.lote.counter += 1
 
     def get_especie_titulo(self):
-        field = self.get_field('codigo_banco')
+        # TODO: rewrite this function
+        codigo_banco = self.get_field('codigo_banco')
         return EspecieTitulo.get_real_value(
-            field.default,
-            self._data.get('especie_titulo')
+            codigo_banco.default,
+            self.especie_titulo
         )
     

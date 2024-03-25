@@ -1,47 +1,13 @@
 from cnab.base.cnab_240 import CNAB240Registro9
-from cnab.core.field import CNABField, CNABFieldType
+from cnab.core.field import CNABFieldInteger, CNABFieldAlfa
 
 
 class Caixa240Registro9(CNAB240Registro9):
-    _meta = {
-        'codigo_banco':CNABField(      #01.5
-			length=3,
-			default='104',
-			validation=CNABFieldType.Int,
-			required=True),
-		'codigo_lote':CNABField(       #02.5
-			length=4,
-			default=9999,
-			validation=CNABFieldType.Int,
-			required=True),
-		'tipo_registro':CNABField(     #03.5
-			length=1,
-			default='9',
-			validation=CNABFieldType.Int,
-			required=True),
-		'filler1':CNABField(          #04.5
-			length=9,
-			default=' ',
-			validation=CNABFieldType.Alfa,
-			required=True),
-		'qtd_lotes':CNABField(      #05.5
-			length=6,
-			default='1',
-			validation=CNABFieldType.Int,
-			required=True),
-		'qtd_registros':CNABField(           #06.5
-			length=6,
-			default='0',
-			validation=CNABFieldType.Int,
-			required=True),
-		'filler2':CNABField(        #07.5
-			length=6,
-			default=' ',
-			validation=CNABFieldType.Alfa,
-			required=True),
-		'filler3':CNABField(           #08.5
-			length=205,
-			default=' ',
-			validation=CNABFieldType.Alfa,
-			required=True),
-    }
+	codigo_banco = CNABFieldInteger("",length=3,default='104',required=True)
+	codigo_lote = CNABFieldInteger("",length=4,default=9999,required=True)
+	tipo_registro = CNABFieldInteger("",length=1,default='9',required=True)
+	filler1 = CNABFieldAlfa("",length=9,default=' ',required=True)
+	qtd_lotes = CNABFieldInteger("",length=6,default='1',required=True)
+	qtd_registros = CNABFieldInteger("",length=6,default='0',required=True)
+	filler2 = CNABFieldAlfa("",length=6,default=' ',required=True)
+	filler3 = CNABFieldAlfa("",length=205,default=' ',required=True)
