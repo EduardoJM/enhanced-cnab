@@ -2,20 +2,10 @@ from functools import total_ordering
 from typing import Union, List, Optional, Callable, Generic, TypeVar, TYPE_CHECKING
 from decimal import Decimal
 from datetime import date, time, datetime
-from enum import Enum
 from . import validators, formatter, exceptions
 
 if TYPE_CHECKING:
     from cnab.base.registro_remessa import RegistroRemessa
-
-class CNABFieldType(Enum):
-    Decimal = 'decimal'
-    Int = 'int'
-    Alfa = 'alfa'
-    Alfa2 = 'alfa2'
-    Date = 'date'
-    Time = 'time'
-    DateReverse = 'dateReverse'
 
 class CNABFieldValueError(Exception):
     pass
@@ -32,23 +22,36 @@ T = TypeVar("T", bound=CNABFieldValueType)
 class CNABFieldDescriptor(Generic[T]):
     def __set__(self, instance, value: T):
         instance.__dict__[self.name] = value
+
+    def _get_parent_value(self, instance):
+        if not hasattr(instance, 'parent') or not instance.parent:
+            return None
+        
+        parent = instance.parent
+        if self.name not in parent.__dict__:
+            return self._get_parent_value(parent)
+        return parent.__dict__[self.name]
     
     def __get__(self, instance, owner) -> T:
         if instance is None:
             return self
-        return instance.__dict__[self.name]
+        
+        try:
+            return instance.__dict__[self.name]
+        except KeyError:
+            return self._get_parent_value(instance)
 
 @total_ordering
 class CNABField:
     name: str = ''
     length: int = 0
-    validation: CNABFieldType
     default: Union[CNABFieldValueType, Callable[[], CNABFieldValueType]]
     required: bool
     validators: List = []
     precision: int = 0
     formatter = None
     segment: str
+    value_from: Optional[str] = None
     
     registro: Optional["RegistroRemessa"] = None
 
@@ -64,15 +67,15 @@ class CNABField:
         default: Union[CNABFieldValueType, Callable[[], CNABFieldValueType]],
         required: Optional[bool] = False,
         precision: Optional[int] = 0,
-        validation: CNABFieldType = CNABFieldType.Int,
+        *,
+        value_from: Optional[str] = None,
     ):
         self.segment = segment
         self.length = length
-        #self.validation = validation
         self.default = default
         self.required = required
         self.precision = precision
-        #self.formatter = None
+        self.value_from = value_from
 
         self.creation_counter = CNABField.creation_counter
         CNABField.creation_counter += 1
@@ -82,19 +85,6 @@ class CNABField:
         if self.required:
             self.validators += [validators.validate_required]
         
-        """
-        if self.validation == CNABFieldType.Alfa2:
-            self.formatter = formatter.FormatterAlfa2(self)
-
-        if self.validation == CNABFieldType.Date:
-            self.validators += [validators.validate_date]
-            self.formatter = formatter.FormatterDate(self)
-
-        if self.validation == CNABFieldType.Time:
-            self.validators += [validators.validate_date]
-            self.formatter = formatter.FormatterTime(self)
-        """
-
         print(segment)
         print(self.formatter)
 
@@ -109,6 +99,60 @@ class CNABField:
     def format_value(self, value: CNABFieldValueType):
         value = self.validate_value(value)
         return self.formatter.to_file(value)
+    
+    def get_value_default(self):
+        if not self.default:
+            return None
+        default = self.default
+        if isinstance(self.default, Callable):
+            # TODO: pass self to default()
+            default = self.default()
+        return default
+    
+    def get_value_unformated(self, registro: "RegistroRemessa"):
+        value = None
+        
+        if hasattr(registro, f'get_{self.name}'):
+            print("Tem fn")
+            fn = getattr(registro, f'get_{self.name}')
+            # TODO: pass self to fn()
+            value = fn()
+
+        if not value and hasattr(registro, self.name):
+            print("tem attr")
+            value = getattr(registro, self.name)
+            print(value)
+
+        return value
+    
+    def get_renamed_value(self, registro: "RegistroRemessa"):
+        if not self.value_from:
+            return None
+        
+        value = None
+        
+        if hasattr(registro, f'get_{self.value_from}'):
+            fn = getattr(registro, f'get_{self.value_from}')
+            value = fn()
+        
+        if not value and hasattr(registro, self.value_from):
+            value = getattr(registro, self.value_from)
+
+        if not value and registro.parent is not None:
+            value = self.get_renamed_value(registro.parent)
+        
+        return value
+
+    def get_value(self):
+        print("----")
+        print("Get Value: ", self.name)
+        default = self.get_value_default()
+        print("Default: ", default)
+        unformated = self.get_value_unformated(self.registro)
+        if not unformated:
+            unformated = self.get_renamed_value(self.registro)
+        print("Unf: ", unformated)
+        return self.format_value(unformated or default)
     
     def value_from_file(self, value: str) -> CNABFieldValueType:
         return self.formatter.from_file(value)
@@ -129,7 +173,7 @@ class CNABField:
         return all(comparations)
     
     def __repr__(self):
-        return f'<{self.__class__.__name__} {self.name}>'
+        return f'<{self.__class__.__name__} {self.name}: {self.segment}>'
 
 class CNABFieldInteger(CNABFieldDescriptor[int], CNABField):
     validators = [validators.validate_integer]
@@ -140,11 +184,11 @@ class CNABFieldInteger(CNABFieldDescriptor[int], CNABField):
         length: int,
         default: Union[int, str, Callable[[], Union[int, str]]],
         required: Optional[bool] = False,
+        *,
+        value_from: Optional[str] = None,
     ):
-        print("OIE?")
         self.formatter = formatter.FormatterInteger(self)
-        print(self.formatter)
-        super().__init__(segment, length, default, required, 0)
+        super().__init__(segment, length, default, required, 0, value_from=value_from)
 
 class CNABFieldAlfa(CNABFieldDescriptor[str], CNABField):
     validators = []
@@ -155,10 +199,12 @@ class CNABFieldAlfa(CNABFieldDescriptor[str], CNABField):
         length: int,
         default: Union[str, Callable[[], str]],
         required: Optional[bool] = False,
+        *,
+        value_from: Optional[str] = None,
     ):
         self.formatter = formatter.FormatterAlfa(self)
 
-        super().__init__(segment, length, default, required, 0)
+        super().__init__(segment, length, default, required, 0, value_from=value_from)
 
 class CNABFieldDecimal(CNABFieldDescriptor[float], CNABField):
     validators = [validators.validate_decimal]
@@ -172,11 +218,13 @@ class CNABFieldDecimal(CNABFieldDescriptor[float], CNABField):
         length: int,
         default: Union[float, int, str, Callable[[], Union[float, int, str]]],
         required: Optional[bool] = False,
-        precision: int = 2
+        precision: int = 2,
+        *,
+        value_from: Optional[str] = None,
     ):
         self.formatter = formatter.FormatterDecimal(self)
 
-        super().__init__(segment, length, default, required, precision)
+        super().__init__(segment, length, default, required, precision, value_from=value_from)
 
 class CNABFieldDate(CNABFieldDescriptor[Union[datetime, time, date, str]], CNABField):
     validators = [validators.validate_date]
@@ -187,10 +235,28 @@ class CNABFieldDate(CNABFieldDescriptor[Union[datetime, time, date, str]], CNABF
         length: int,
         default: Union[str, date, time, datetime, Callable[[], Union[str, date, time, datetime]]],
         required: Optional[bool] = False,
+        *,
+        value_from: Optional[str] = None,
     ):
         self.formatter = formatter.FormatterDate(self)
 
-        super().__init__(segment, length, default, required, 0)
+        super().__init__(segment, length, default, required, 0, value_from=value_from)
+
+class CNABFieldTime(CNABFieldDescriptor[Union[datetime, time, str]], CNABField):
+    validators = [validators.validate_date]
+
+    def __init__(
+        self,
+        segment: str,
+        length: int,
+        default: Union[str, time, datetime, Callable[[], Union[str, time, datetime]]],
+        required: Optional[bool] = False,
+        *,
+        value_from: Optional[str] = None,
+    ):
+        self.formatter = formatter.FormatterTime(self)
+
+        super().__init__(segment, length, default, required, 0, value_from=value_from)
 
 class AutoGeneratedFieldException(Exception):
     def __init__(self, field: str) -> None:
@@ -198,6 +264,20 @@ class AutoGeneratedFieldException(Exception):
         super().__init__(msg)
 
 class CNABCreatedDateField(CNABFieldDate):
+    def __init__(self, segment: str, length: int, required: Optional[bool] = False):
+        super().__init__(segment, length, lambda: datetime.now(), required)
+
+    def __set__(self, instance, value):
+        raise AutoGeneratedFieldException(self.name)
+    
+    def __get__(self, instance, owner) -> datetime:
+        if instance is None:
+            return self
+        if not instance.__dict__.get(self.name):
+            instance.__dict__[self.name] = datetime.now()
+        return instance.__dict__[self.name]
+
+class CNABCreatedTimeField(CNABFieldTime):
     def __init__(self, segment: str, length: int, required: Optional[bool] = False):
         super().__init__(segment, length, lambda: datetime.now(), required)
 

@@ -1,5 +1,4 @@
 from typing import Optional
-from datetime import datetime
 from cnab.base.registro_remessa import RegistroRemessa
 from cnab.base.registro import Registro
 from cnab.core.enums import TipoServico, TipoInscricao
@@ -25,42 +24,6 @@ class CNAB240Registro1(RegistroRemessa):
         
         self._data['tipo_inscricao'] = value.value
 
-    def get_tipo_servico(self):
-        return self.get_data_or_parent('tipo_servico')
-    
-    def get_tipo_inscricao(self):
-        return self.get_data_or_parent('tipo_inscricao')
-    
-    def get_numero_inscricao(self):
-        return self.get_data_or_parent('numero_inscricao')
-    
-    def get_agencia(self):
-        return self.get_data_or_parent('agencia')
-    
-    def get_agencia_dv(self):
-        return self.get_data_or_parent('agencia_dv')
-    
-    def get_conta(self):
-        return self.get_data_or_parent('conta')
-    
-    def get_conta_dv(self):
-        return self.get_data_or_parent('conta_dv')
-    
-    def get_convenio(self):
-        return self.get_data_or_parent('convenio')
-    
-    def get_nome_empresa(self):
-        return self.get_data_or_parent('nome_empresa')
-    
-    def get_numero_remessa(self):
-        return self.get_data_or_parent('numero_sequencial_arquivo')
-    
-    def get_codigo_beneficiario(self):
-        return self.get_data_or_parent('codigo_beneficiario')
-    
-    def get_codigo_beneficiario_dv(self):
-        return self.get_data_or_parent('codigo_beneficiario_dv')
-    
     def get_text(self) -> str:
         dataReg5 = {}
         dataReg5['qtd_titulos_simples'] = 0
@@ -72,9 +35,9 @@ class CNAB240Registro1(RegistroRemessa):
 
         retorno = ''
         for key, field in self._meta.items():
-            field.registro = self
-            default = self.get_default(field)
-            retorno += self.get_value(key, default)
+            #field.registro = self
+            #default = self.get_default(field)
+            retorno += field.get_value()
 
         result = [retorno]
 
@@ -82,13 +45,13 @@ class CNAB240Registro1(RegistroRemessa):
             for child in self._children:
                 if child.get_codigo_carteira() == 1:
                     dataReg5['qtd_titulos_simples'] += 1
-                    dataReg5['vrl_titulos_simples'] += float(child.get_unformated('valor'))
+                    dataReg5['vrl_titulos_simples'] += float(child.valor)
                 if child.get_codigo_carteira() == 3:
                     dataReg5['qtd_titulos_caucionada'] += 1
-                    dataReg5['vlr_titulos_caucionada'] += float(child.get_unformated('valor'))
+                    dataReg5['vlr_titulos_caucionada'] += float(child.valor)
                 if child.get_codigo_carteira() == 4:
                     dataReg5['qtd_titulos_descontada'] += 1
-                    dataReg5['vlr_titulos_descontada'] += float(child.get_unformated('valor'))
+                    dataReg5['vlr_titulos_descontada'] += float(child.valor)
                 result += child.get_text()
 
             if not hasattr(self, 'registro5_class'):

@@ -1,134 +1,34 @@
 from cnab.base.retorno.CNAB400 import Registro9Retorno
-from cnab.core.field import CNABField, CNABFieldType
+from cnab.core.field import CNABFieldInteger, CNABFieldAlfa, CNABFieldDecimal
 
 
 class BradescoRetornoCnab400Registro9(Registro9Retorno):
-    _meta = {
-        "tipo_registro": CNABField(  # 01.5
-            length=1, default="9", validation=CNABFieldType.Int, required=True
-        ),
-        "ident_retorno": CNABField(  # 01.5
-            length=1, default="2", validation=CNABFieldType.Int, required=True
-        ),
-        "ident__tipo_retorno": CNABField(  # 01.5
-            length=2, default="01", validation=CNABFieldType.Int, required=True
-        ),
-        "codigo_banco": CNABField(  # 01.5
-            length=3, default="237", validation=CNABFieldType.Int, required=True
-        ),
-        "filler0": CNABField(  # 02.5
-            length=10, default="", validation=CNABFieldType.Alfa, required=True
-        ),
-        "qtd_titulos_cobranca": CNABField(  # 03.5
-            length=8, default="1", validation=CNABFieldType.Int, required=True
-        ),
-        "valor_total_cobranca": CNABField(  # 04.5
-            length=12,
-            default="",
-            validation=CNABFieldType.Decimal,
-            precision=2,
-            required=True,
-        ),
-        "n_aviso_bancario": CNABField(  # 05.5
-            length=8, default="1", validation=CNABFieldType.Alfa, required=True
-        ),
-        "filler1": CNABField(  # 06.5
-            length=10, default=" ", validation=CNABFieldType.Alfa, required=True
-        ),
-        "QtdEntradaConfirmadaC02": CNABField(  # 12.5
-            length=5, default="", validation=CNABFieldType.Int, required=True
-        ),
-        "ValEntradaConfirmadaC02": CNABField(  # 04.5
-            length=10,
-            default="",
-            validation=CNABFieldType.Decimal,
-            precision=2,
-            required=True,
-        ),
-        "ValTotLiquidacaoC06": CNABField(  # 04.5
-            length=10,
-            default="",
-            validation=CNABFieldType.Decimal,
-            precision=2,
-            required=True,
-        ),
-        "QtdLiquidacaoC06": CNABField(  # 12.5
-            length=5, default="", validation=CNABFieldType.Int, required=True
-        ),
-        "ValLiquidacaoC06": CNABField(  # 04.5
-            length=10,
-            default="",
-            validation=CNABFieldType.Decimal,
-            precision=2,
-            required=True,
-        ),
-        "QtdBaixaC09C10": CNABField(  # 12.5
-            length=5, default="", validation=CNABFieldType.Int, required=True
-        ),
-        "ValBaixaC09C10": CNABField(  # 04.5
-            length=10,
-            default="",
-            validation=CNABFieldType.Decimal,
-            precision=2,
-            required=True,
-        ),
-        "QtdAbatimentoCanceladoC13": CNABField(  # 12.5
-            length=5, default="", validation=CNABFieldType.Int, required=True
-        ),
-        "ValAbatimentoCanceladoC13": CNABField(  # 04.5
-            length=10,
-            default="",
-            validation=CNABFieldType.Decimal,
-            precision=2,
-            required=True,
-        ),
-        "QtdVencimentoAlteradoC14": CNABField(  # 12.5
-            length=5, default="", validation=CNABFieldType.Int, required=True
-        ),
-        "ValVencimentoAlteradoC14": CNABField(  # 04.5
-            length=10,
-            default="",
-            validation=CNABFieldType.Decimal,
-            precision=2,
-            required=True,
-        ),
-        "QtdAbatimentoConcedidoC12": CNABField(  # 12.5
-            length=5, default="", validation=CNABFieldType.Int, required=True
-        ),
-        "ValAbatimentoConcedidoC12": CNABField(  # 04.5
-            length=10,
-            default="",
-            validation=CNABFieldType.Decimal,
-            precision=2,
-            required=True,
-        ),
-        "QtdConfirmacaoInstProtestoC19": CNABField(  # 12.5
-            length=5, default="", validation=CNABFieldType.Int, required=True
-        ),
-        "ValConfirmacaoInstProtestoC19": CNABField(  # 04.5
-            length=10,
-            default="",
-            validation=CNABFieldType.Decimal,
-            precision=2,
-            required=True,
-        ),
-        "filler2": CNABField(  # 06.5
-            length=174, default=" ", validation=CNABFieldType.Alfa, required=True
-        ),
-        "ValTotalRateiosEfetuados": CNABField(  # 04.5
-            length=13,
-            default="",
-            validation=CNABFieldType.Decimal,
-            precision=2,
-            required=True,
-        ),
-        "QtdTotalRateiosEfetuados": CNABField(  # 12.5
-            length=8, default="", validation=CNABFieldType.Int, required=True
-        ),
-        "filler3": CNABField(  # 06.5
-            length=9, default=" ", validation=CNABFieldType.Alfa, required=True
-        ),
-        "numero_sequencial_registro": CNABField(
-            length=6, default="", validation=CNABFieldType.Int, required=True
-        ),
-    }
+    tipo_registro = CNABFieldInteger("", length=1, default="9", required=True)
+    ident_retorno = CNABFieldInteger("",    length=1, default="2", required=True)
+    ident__tipo_retorno = CNABFieldInteger("",length=2, default="01", required=True)
+    codigo_banco = CNABFieldInteger("",length=3, default="237", required=True)
+    filler0 = CNABFieldAlfa("",length=10, default="", required=True)
+    qtd_titulos_cobranca = CNABFieldInteger("",length=8, default="1", required=True)
+    valor_total_cobranca = CNABFieldDecimal("",length=12,default="",precision=2,required=True,)
+    n_aviso_bancario = CNABFieldAlfa("",length=8, default="1", required=True)
+    filler1 = CNABFieldAlfa("",length=10, default=" ", required=True)
+    QtdEntradaConfirmadaC02 = CNABFieldInteger("",length=5, default="", required=True)
+    ValEntradaConfirmadaC02 = CNABFieldDecimal("",length=10,default="",precision=2,required=True,)
+    ValTotLiquidacaoC06 = CNABFieldDecimal("",length=10,default="",precision=2,required=True,)
+    QtdLiquidacaoC06 = CNABFieldInteger("",length=5, default="", required=True)
+    ValLiquidacaoC06 = CNABFieldDecimal("",length=10,default="",precision=2,required=True,)
+    QtdBaixaC09C10 = CNABFieldInteger("",length=5, default="", required=True)
+    ValBaixaC09C10 = CNABFieldDecimal("",length=10,default="",precision=2,required=True,)
+    QtdAbatimentoCanceladoC13 = CNABFieldInteger("",length=5, default="", required=True)
+    ValAbatimentoCanceladoC13 = CNABFieldDecimal("",length=10,default="",precision=2,required=True,)
+    QtdVencimentoAlteradoC14 = CNABFieldInteger("",length=5, default="", required=True)
+    ValVencimentoAlteradoC14 = CNABFieldDecimal("",length=10,default="",precision=2,required=True,)
+    QtdAbatimentoConcedidoC12 = CNABFieldInteger("",length=5, default="", required=True)
+    ValAbatimentoConcedidoC12 = CNABFieldDecimal("",length=10,default="",precision=2,required=True,)
+    QtdConfirmacaoInstProtestoC19 = CNABFieldInteger("",length=5, default="", required=True)
+    ValConfirmacaoInstProtestoC19 = CNABFieldDecimal("",length=10,default="",precision=2,required=True,)
+    filler2 = CNABFieldAlfa("",length=174, default=" ", required=True)
+    ValTotalRateiosEfetuados = CNABFieldDecimal("",length=13,default="",precision=2,required=True,)
+    QtdTotalRateiosEfetuados = CNABFieldInteger("",length=8, default="", required=True)
+    filler3 = CNABFieldAlfa("",length=9, default=" ", required=True)
+    numero_sequencial_registro = CNABFieldInteger("",length=6, default="", required=True)

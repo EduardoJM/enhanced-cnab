@@ -1,10 +1,11 @@
 from functools import reduce
 from cnab.core.field import CNABField
 
-def _get_cnab_field(cls, attr: str):
+def _get_cnab_field(cls, instance, attr: str):
     value = getattr(cls, attr)
     if isinstance(value, CNABField):
         value.name = attr
+        value.registro = instance
         return value
     return None
 
@@ -16,7 +17,7 @@ class RegistroBase:
         super_new = super().__new__(cls)
         
         attrs = super_new.__dir__()
-        cnab_fields = list(map(lambda attr: _get_cnab_field(cls, attr), attrs))
+        cnab_fields = list(map(lambda attr: _get_cnab_field(cls, super_new, attr), attrs))
         cnab_fields = list(filter(None, cnab_fields))
         cnab_fields.sort()
 

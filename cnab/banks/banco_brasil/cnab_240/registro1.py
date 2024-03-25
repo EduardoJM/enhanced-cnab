@@ -1,6 +1,10 @@
 from typing import Optional, Union, TYPE_CHECKING
 from cnab.base.cnab_240 import CNAB240Registro1
-from cnab.core.field import CNABField, CNABCreatedDateField, CNABFieldType
+from cnab.core.field import (
+    CNABFieldInteger,
+    CNABFieldAlfa,
+    CNABCreatedDateField
+)
 from cnab.utils.dict_utils import set_if_has_value
 from .registro5 import BancoBrasil240Registro5
 
@@ -9,91 +13,35 @@ if TYPE_CHECKING:
 
 class BancoBrasil240Registro1(CNAB240Registro1):
     registro5_class = BancoBrasil240Registro5
-    _meta = {
-        "codigo_banco": CNABField(  # 01.1
-            length=3, default="001", validation=CNABFieldType.Int, required=True
-        ),
-        "codigo_lote": CNABField(  # 02.1
-            length=4, default=1, validation=CNABFieldType.Int, required=True
-        ),
-        "tipo_registro": CNABField(  # 3.1
-            length=1, default=1, validation=CNABFieldType.Int, required=True
-        ),
-        "operacao": CNABField(  # 04.1
-            length=1, default="R", validation=CNABFieldType.Alfa, required=True
-        ),
-        "tipo_servico": CNABField(  # 05.1
-            length=2, default="01", validation=CNABFieldType.Int, required=True
-        ),
-        "filler1": CNABField(  # 06.1
-            length=2, default=" ", validation=CNABFieldType.Alfa, required=True
-        ),
-        "versa_layout": CNABField(  # 07.1
-            length=3, default="000", validation=CNABFieldType.Int, required=True
-        ),
-        "filler2": CNABField(  # 08.1
-            length=1, default=" ", validation=CNABFieldType.Alfa, required=True
-        ),
-        "tipo_inscricao": CNABField(  # 09.1
-            length=1, default="0", validation=CNABFieldType.Int, required=True
-        ),
-        "numero_inscricao": CNABField(  # 10.1
-            length=15, default="", validation=CNABFieldType.Int, required=True
-        ),
-        "convenio": CNABField(  # 11.1
-            length=9, default="0", validation=CNABFieldType.Int, required=True
-        ),
-        "cobranca": CNABField(  # 11.1
-            length=4, default="0014", validation=CNABFieldType.Int, required=True
-        ),
-        "carteira": CNABField(  # 11.1
-            length=2, default="0", validation=CNABFieldType.Int, required=True
-        ),
-        "variacao": CNABField(  # 11.1
-            length=3, default="000", validation=CNABFieldType.Int, required=True
-        ),
-        "situacao_arquivo": CNABField(  # 11.1
-            length=2, default=" ", validation=CNABFieldType.Alfa, required=True
-        ),
-        "agencia": CNABField(  # 12.1
-            length=5, default="", validation=CNABFieldType.Int, required=True
-        ),
-        "agencia_dv": CNABField(  # 13.1
-            length=1, default="", validation=CNABFieldType.Alfa, required=True
-        ),
-        "conta": CNABField(  # 14.1
-            length=12, default="", validation=CNABFieldType.Int, required=True
-        ),
-        "conta_dv": CNABField(  # 15.1
-            length=1, default="", validation=CNABFieldType.Alfa, required=True
-        ),
-        "filler3": CNABField(  # 16.1
-            length=1, default="0", validation=CNABFieldType.Alfa, required=True
-        ),
-        "nome_empresa": CNABField(  # 17.1
-            length=30, default="", validation=CNABFieldType.Alfa, required=True
-        ),
-        "mensagem_fixa1": CNABField(  # 18.1 mensagems 1 e 2 : somente use para mensagens que serao impressas de forma identica em todos os boletos do lote
-            length=40, default=" ", validation=CNABFieldType.Alfa, required=True
-        ),
-        "mensagem_fixa2": CNABField(  # 19.1 mensagems 1 e 2 : somente use para mensagens que serao impressas de forma identica em todos os boletos do lote
-            length=40, default=" ", validation=CNABFieldType.Alfa, required=True
-        ),
-        "numero_remessa": CNABField(  # 20.1
-            length=8, default="0", validation=CNABFieldType.Int, required=True
-        ),
-        "data_gravacao": CNABCreatedDateField(  # 21.1
-            length=8,
-            validation=CNABFieldType.Date,
-            required=True,
-        ),
-        "filler4": CNABField(  # 22.1
-            length=8, default="0", validation=CNABFieldType.Int, required=True
-        ),
-        "filler5": CNABField(  # 23.1
-            length=33, default=" ", validation=CNABFieldType.Alfa, required=True
-        ),
-    }
+    
+    codigo_banco = CNABFieldInteger("",length=3, default="001", required=True)
+    codigo_lote = CNABFieldInteger("",length=4, default=1, required=True)
+    tipo_registro = CNABFieldInteger("",length=1, default=1, required=True)
+    operacao = CNABFieldAlfa("",length=1, default="R", required=True)
+    tipo_servico = CNABFieldInteger("",length=2, default="01", required=True)
+    filler1 = CNABFieldAlfa("",length=2, default=" ", required=True)
+    versa_layout = CNABFieldInteger("",length=3, default="000", required=True)
+    filler2 = CNABFieldAlfa("",length=1, default=" ", required=True)
+    tipo_inscricao = CNABFieldInteger("",length=1, default="0", required=True)
+    numero_inscricao = CNABFieldInteger("",length=15, default="", required=True)
+    convenio = CNABFieldInteger("",length=9, default="0", required=True)
+    cobranca = CNABFieldInteger("",length=4, default="0014", required=True)
+    carteira = CNABFieldInteger("",length=2, default="0", required=True)
+    variacao = CNABFieldInteger("",length=3, default="000", required=True)
+    situacao_arquivo = CNABFieldAlfa("",length=2, default=" ", required=True)
+    agencia = CNABFieldInteger("",length=5, default="", required=True)
+    agencia_dv = CNABFieldAlfa("",length=1, default="", required=True)
+    conta = CNABFieldInteger("",length=12, default="", required=True)
+    conta_dv = CNABFieldAlfa("",length=1, default="", required=True)
+    filler3 = CNABFieldAlfa("",length=1, default="0", required=True)
+    nome_empresa = CNABFieldAlfa("",length=30, default="", required=True)
+    mensagem_fixa1 = CNABFieldAlfa("",length=40, default=" ", required=True)
+    mensagem_fixa2 = CNABFieldAlfa("",length=40, default=" ", required=True)
+    numero_remessa = CNABFieldInteger("",length=8, default="0", required=True,value_from='numero_sequencial_arquivo')
+    data_gravacao = CNABCreatedDateField("",length=8,required=True,)
+    filler4 = CNABFieldInteger("",length=8, default="0", required=True)
+    filler5 = CNABFieldAlfa("",length=33, default=" ", required=True)
+
 
     def __init__(
         self,
@@ -119,8 +67,7 @@ class BancoBrasil240Registro1(CNAB240Registro1):
         mensagem_fixa1: Optional[str] = None,
         mensagem_fixa2: Optional[str] = None,
         numero_remessa: Optional[Union[str, int]] = None,
-        **kwargs: dict,
-    ):
+        **kwargs: dict,):
         set_if_has_value(kwargs, 'codigo_banco', codigo_banco)
         set_if_has_value(kwargs, 'codigo_lote', codigo_lote)
         set_if_has_value(kwargs, 'tipo_registro', tipo_registro)

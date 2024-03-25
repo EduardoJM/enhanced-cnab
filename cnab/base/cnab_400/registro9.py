@@ -9,5 +9,5 @@ class CNAB400Registro9(RegistroRemessa):
         self.init_numero_registro()
 
     def init_numero_registro(self):
-        self._data['numero_registro'] = self.header.counter + 1
-        self._data['numero_sequencial'] = self.header.counter + 1
+        self.numero_registro = self.header.counter + 1
+        self.numero_sequencial = self.header.counter + 1
