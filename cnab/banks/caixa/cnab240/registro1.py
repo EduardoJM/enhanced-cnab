@@ -39,8 +39,7 @@ class Caixa240Registro1(CNAB240Registro1):
 		if self.versao_layout:
 			return self.versao_layout
 
-		codigo_beneficiario = self.get_data_or_parent('codigo_beneficiario')
-		if len(codigo_beneficiario) > 6:
+		if len(self.codigo_beneficiario) > 6:
 			return '067'
 		return '060'
 
