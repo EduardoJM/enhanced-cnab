@@ -20,6 +20,7 @@ lote.inserir_detalhe(
     data_vencimento=date(2018, 4, 5),
     valor=450.40,
     tipo_inscricao="1",
+    data_emissao=date(2018, 4, 5),
     numero_inscricao="70116028106",
     nome_pagador="EDUARDO OLIVEIRA",
     endereco_pagador="RUA JANDIRA LEAO CUNHA",

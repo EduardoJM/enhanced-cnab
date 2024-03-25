@@ -10,35 +10,16 @@ class CNAB400Registro1(RegistroRemessa):
         self.init_numero_registro()
 
     def init_numero_registro(self):
-        self.numero_registro = self.header.counter
-        self.numero_sequencial = self.header.counter
+        if hasattr(self, 'numero_registro'):
+            self.numero_registro = self.header.counter
+        if hasattr(self, 'numero_sequencial'):
+            self.numero_sequencial = self.header.counter
 
     def append(self, child: Registro):
         super().append(child)
 
         self.header.counter += 1
-
-    def get_tipo_inscricao_empresa(self):
-        return self.get_data_or_parent('tipo_inscricao_empresa')
     
-    def get_numero_inscricao_empresa(self):
-        return self.get_data_or_parent('numero_inscricao_empresa')
-    
-    def get_agencia(self):
-        return self.get_data_or_parent('agencia')
-
-    def get_conta(self):
-        return self.get_data_or_parent('conta')
-
-    def get_conta_dv(self):
-        return self.get_data_or_parent('conta_dv')
-    
-    def get_data_emissao(self):
-        return datetime.now()
-    
-    def get_numero_registro(self):
-        return self.get_data_or_parent('numero_sequencial')
-
     def get_especie_titulo(self):
         field = self.header.get_field('codigo_banco')
         return EspecieTitulo.get_real_value(

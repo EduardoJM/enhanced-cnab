@@ -54,7 +54,7 @@ cobranca = lote.inserir_detalhe(
     nome_pagador="Elias Alves",  # O Pagador é o cliente, preste atenção nos campos abaixo
     endereco_pagador="Rua Esquerda, 42",
     bairro_pagador="Bairro Queluz",
-    cep_pagador="36400-000",  # com hífem
+    cep_pagador="36400000",  # com hífem
     cidade_pagador="Conselheiro Lafaiete",
     uf_pagador="MG",
     # Registro 3R Multas, descontos, etc

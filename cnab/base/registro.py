@@ -66,18 +66,6 @@ class Registro(RegistroBase):
     #    print(value)
     #    return field.format_value(value)
 
-    def get_data_or_parent(self, field: str):
-        value = getattr(self, field)
-        if value:
-            return value
-        if not self.header:
-            return None
-        
-        try:
-            return getattr(self.header, field)
-        except AttributeError:
-            return None
-
     def get_codigo_carteira(self):
         if not hasattr(self, 'codigo_carteira'):
             return None

@@ -19,8 +19,8 @@ class Santander240Registro3P(CNAB240Registro3):
     agencia_dv = CNABFieldInteger("",length=1, default="", required=True)
     conta = CNABFieldInteger("",length=9, default="0", required=True)
     conta_dv = CNABFieldInteger("",length=1, default="", required=True)
-    codigo_beneficiario = CNABFieldInteger("",length=9, default="", required=True)
-    codigo_beneficiario_dv = CNABFieldInteger("",length=1, default="", required=True)
+    codigo_beneficiario = CNABFieldInteger("",length=9, default="", required=True, value_from='conta')
+    codigo_beneficiario_dv = CNABFieldInteger("",length=1, default="", required=True, value_from='conta_dv')
     filler2 = CNABFieldAlfa("",length=2, default=" ", required=True)
     nosso_numero = CNABFieldInteger("",length=13, default="", required=True)
     tipo_cobranca = CNABFieldInteger("",length=1, default="5", required=True)
@@ -81,12 +81,6 @@ class Santander240Registro3P(CNAB240Registro3):
 
         self._inserir_detalhe(**kwargs)
 
-    def get_codigo_beneficiario(self):
-        return self.get_data_or_parent('conta')
-    
-    def get_codigo_beneficiario_dv(self):
-        return self.get_data_or_parent('conta_dv')
-    
     def get_nosso_numero(self):
         if not self.nosso_numero:
             return "0"
