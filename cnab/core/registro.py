@@ -23,4 +23,8 @@ class RegistroBase:
 
         super_new._meta = reduce(_get_cnab_meta, cnab_fields, {})
         
+        for key, field in super_new._meta.items():
+            if not getattr(super_new, key):
+                setattr(super_new, key, field.default)
+        
         return super_new
