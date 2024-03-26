@@ -1,3 +1,4 @@
+import logging
 from functools import reduce
 from cnab.core.field import CNABField
 
@@ -22,9 +23,13 @@ class RegistroBase:
         cnab_fields.sort()
 
         super_new._meta = reduce(_get_cnab_meta, cnab_fields, {})
-        
-        for key, field in super_new._meta.items():
-            if not getattr(super_new, key):
-                setattr(super_new, key, field.default)
+
+        register_length = reduce(lambda prev, x: prev + x.length, cnab_fields, 0)
+        if register_length not in [240, 400]:
+            logging.getLogger(__name__).warning(
+                "%s, Register length %s is not compatible with CNAB 240 or CNAB 400",
+                str(cls),
+                register_length,
+            )
         
         return super_new

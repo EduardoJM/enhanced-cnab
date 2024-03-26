@@ -15,7 +15,19 @@ class RegistroRemessa(RegistroBase):
         self._children = []
         self.parent = parent
         
+        setted = []
         for key, value in kwargs.items():
+            setted = [*setted, key]
+            setattr(self, key, value)
+
+        for key, field in self._meta.items():
+            if key in setted:
+                continue
+            if field.auto_generated:
+                continue
+            value = field.get_value_default()
+            if value is None:
+                continue
             setattr(self, key, value)
         
         if not parent:
