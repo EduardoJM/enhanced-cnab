@@ -1,12 +1,14 @@
 from typing import Optional, Union, TYPE_CHECKING
 from cnab.base.remessa import Remessa
 from cnab.utils.dict_utils import set_if_has_value
+from cnab.repository import register_remessa_layout
 from .registro0 import BancoBrasil240Registro0
 from .registro9 import BancoBrasil240Registro9
 
 if TYPE_CHECKING:
     from .registro1 import BancoBrasil240Registro1
 
+@register_remessa_layout('001', 'CNAB240')
 class CNAB240BancoBrasil(Remessa):
     header: BancoBrasil240Registro0
     registro0_class = BancoBrasil240Registro0
