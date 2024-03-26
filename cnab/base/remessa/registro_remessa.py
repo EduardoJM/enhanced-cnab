@@ -1,17 +1,16 @@
-from abc import abstractmethod
-from typing import List, Optional
+from typing import Optional, List
 from cnab.core.field import CNABField
 from cnab.core.registro import RegistroBase
 from cnab.core import exceptions
 
-class Registro(RegistroBase):
-    parent: Optional["Registro"] = None
-    header: Optional["Registro"] = None
+class RegistroRemessa(RegistroBase):
+    parent: Optional["RegistroRemessa"] = None
+    header: Optional["RegistroRemessa"] = None
 
-    _children: List["Registro"] = []
+    _children: List["RegistroRemessa"] = []
     _meta: Optional[dict] = None
 
-    def __init__(self, header: Optional["Registro"], parent: Optional["Registro"], **kwargs: dict):
+    def __init__(self, header: Optional["RegistroRemessa"], parent: Optional["RegistroRemessa"], **kwargs: dict):
         self.header = header
         self._children = []
         self.parent = parent
@@ -40,9 +39,17 @@ class Registro(RegistroBase):
             return None
         return int(value)
 
-    def append(self, child: "Registro"):
+    def append(self, child: "RegistroRemessa"):
         self._children.append(child)
 
-    @abstractmethod
     def get_text(self) -> str:
-        raise NotImplementedError("get_text() is not implemented")
+        retorno = ''
+        for _, field in self._meta.items():
+            retorno += field.get_value()
+            
+        result = [retorno]
+
+        for child in self._children:
+            result += child.get_text()
+
+        return result

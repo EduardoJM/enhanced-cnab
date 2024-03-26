@@ -1,11 +1,10 @@
 from typing import Optional
-from cnab.base.registro_remessa import RegistroRemessa
-from cnab.base.registro import Registro
+from cnab.base.remessa import RegistroRemessa
 from cnab.core.enums import TipoServico, TipoInscricao
 from cnab.core.exceptions import CNABInvalidTypeError
 
 class CNAB240Registro1(RegistroRemessa):
-    def __init__(self, header: Optional["Registro"], parent: Optional["Registro"], **kwargs: dict):
+    def __init__(self, header: Optional[RegistroRemessa], parent: Optional[RegistroRemessa], **kwargs: dict):
         self.counter = 0
         super().__init__(header, parent, **kwargs)
 
@@ -64,7 +63,7 @@ class CNAB240Registro1(RegistroRemessa):
 
         return result
     
-    def append(self, child: Registro):
+    def append(self, child: RegistroRemessa):
         super().append(child)
 
         self.counter += 1

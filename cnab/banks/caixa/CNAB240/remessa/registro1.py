@@ -1,4 +1,4 @@
-from cnab.base.cnab_240 import CNAB240Registro1
+from cnab.base.remessa.CNAB240 import CNAB240Registro1
 from cnab.core.field import CNABFieldInteger, CNABFieldAlfa, CNABCreatedDateField
 from .registro5 import Caixa240Registro5
 

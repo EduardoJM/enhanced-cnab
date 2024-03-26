@@ -1,8 +1,8 @@
 from typing import Optional
-from cnab.base.cnab_240 import CNAB240Registro3
+from cnab.base.remessa.CNAB240 import CNAB240Registro3
 from cnab.core.field import CNABFieldInteger, CNABFieldAlfa, CNABFieldDate, CNABFieldDecimal
 from cnab.core.especie import CNABFieldEspecieTitulo
-from cnab.base.registro import Registro
+from cnab.base.remessa import RegistroRemessa
 from cnab.utils.check_digit import compute_check_digit
 from .registro3Q import Santander240Registro3Q
 from .registro1 import Santander240Registro1
@@ -73,8 +73,8 @@ class Santander240Registro3P(CNAB240Registro3):
 
     def __init__(
         self,
-        header: Optional["Registro"],
-        parent: Optional["Registro"],
+        header: Optional[RegistroRemessa],
+        parent: Optional[RegistroRemessa],
         lote: Santander240Registro1,
         **kwargs: dict
     ):

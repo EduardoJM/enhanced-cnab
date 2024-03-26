@@ -7,7 +7,7 @@ from cnab.core.field import (
     CNABFieldAlfa,
 )
 from cnab.core.especie import CNABFieldEspecieTitulo
-from cnab.base.registro import Registro
+from cnab.base.remessa.CNAB240 import Registro
 from .registro3Q import BancoBrasil240Registro3Q
 from .registro3R import BancoBrasil240Registro3R
 from .registro3S1e2 import BancoBrasil240Registro3S1e2
