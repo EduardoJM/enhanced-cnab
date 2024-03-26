@@ -1,5 +1,5 @@
 from abc import abstractmethod
-from typing import List, Optional, Callable
+from typing import List, Optional
 from cnab.core.field import CNABField
 from cnab.core.registro import RegistroBase
 from cnab.core import exceptions
@@ -31,40 +31,6 @@ class Registro(RegistroBase):
             raise exceptions.IsNotCNABFieldError(key)
         item.name = key
         return item
-
-    #def get_unformated(self, key, default=None):
-    #    value = None
-    #    if hasattr(self, f'get_{key}'):
-    #        fn = getattr(self, f'get_{key}')
-    #        value = fn()
-    #
-    #    if not value:
-    #        value = getattr(self, key)
-    #
-    #    if not value:
-    #        return default
-    #    return value
-    
-    #def get_default(self, field: CNABField):
-    #    print(field)
-    #    print(field.default)
-    #
-    #    if not field.default:
-    #        return field.default
-    #    
-    #    if isinstance(field.default, Callable):
-    #        return field.default()
-    #    
-    #    return field.default
-
-    #def get_value(self, key, default=None):
-    #    value = self.get_unformated(key, default)
-    #    field = self.get_field(key)
-    #    print("@@@@@@@@@@@@@@@@")
-    #    print(key)
-    #    print(default)
-    #    print(value)
-    #    return field.format_value(value)
 
     def get_codigo_carteira(self):
         if not hasattr(self, 'codigo_carteira'):
