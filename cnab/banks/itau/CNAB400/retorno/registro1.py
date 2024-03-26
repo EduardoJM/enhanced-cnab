@@ -5,6 +5,7 @@ from cnab.core.field import (
     CNABFieldDecimal,
     CNABFieldDate,
 )
+from cnab.core.especie import CNABFieldEspecieTitulo
 
 
 class ItauRetornoCnab400Registro1(Registro1Retorno):
@@ -33,7 +34,7 @@ class ItauRetornoCnab400Registro1(Registro1Retorno):
     codigo_banco = CNABFieldInteger("166-168", length=3, default="341", required=True)
     agencia_cobradora = CNABFieldInteger("169-172", length=4, default="0", required=True)
     agencia_cobradora_dv = CNABFieldInteger("173-173", length=1, default="0", required=True)
-    especie_titulo = CNABFieldInteger("174-175", length=2, default="2", required=True)
+    especie_titulo = CNABFieldEspecieTitulo("174-175", length=2, required=True)
     vlr_tarifas = CNABFieldDecimal("176-188", length=11, default="", precision=2, required=True)
     filler43 = CNABFieldAlfa("189-214", length=26, default="", required=True)
     vlr_iof = CNABFieldDecimal("215-227", length=11, default="", precision=2, required=True)

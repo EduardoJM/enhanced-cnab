@@ -1,6 +1,7 @@
 from typing import Optional
 from cnab.base.cnab_400 import CNAB400Registro1
 from cnab.core.field import CNABFieldInteger, CNABFieldAlfa, CNABFieldDecimal, CNABFieldDate
+from cnab.core.especie import CNABFieldEspecieTitulo
 from cnab.base.registro import Registro
 from .registro2 import ItauCnab400Registro2
 
@@ -27,7 +28,7 @@ class ItauCnab400Registro1(CNAB400Registro1):
     valor = CNABFieldDecimal("", length=11, default="", precision=2, required=True)
     codigo_banco = CNABFieldInteger("", length=3, default="341", required=True)
     agencia_cobradora = CNABFieldInteger("", length=5, default="0", required=True)
-    especie_titulo = CNABFieldInteger("", length=2, default="2", required=True)
+    especie_titulo = CNABFieldEspecieTitulo("", length=2, required=True)
     aceite = CNABFieldAlfa("", length=1, default="N", required=True)
     data_emissao = CNABFieldDate("", length=6, default="", required=True)
     cod_instrucao1 = CNABFieldAlfa("", length=2, default=" ", required=True)

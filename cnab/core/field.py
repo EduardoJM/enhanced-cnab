@@ -1,8 +1,9 @@
 from functools import total_ordering
 from typing import Union, List, Optional, Callable, Generic, TypeVar, TYPE_CHECKING
+from enum import Enum
 from decimal import Decimal
 from datetime import date, time, datetime
-from . import validators, formatter, exceptions
+from . import validators, formatter
 
 if TYPE_CHECKING:
     from cnab.base.registro_remessa import RegistroRemessa
@@ -280,3 +281,30 @@ class CNABCreatedTimeField(CNABFieldTime):
         if not instance.__dict__.get(self.name):
             instance.__dict__[self.name] = datetime.now()
         return instance.__dict__[self.name]
+
+E = TypeVar("E", bound=Enum)
+
+class CNABFieldEnum(CNABFieldDescriptor[E], CNABField):
+    validators = []
+    choices: E
+
+    def __init__(
+        self,
+        choices: type[E],
+        segment: str,
+        length: int,
+        default: E,
+        required: Optional[bool] = False,
+        is_integer: Optional[bool] = False,
+        *,
+        value_from: Optional[str] = None,
+    ):
+        self.choices = choices
+        self.formatter = formatter.FormatterEnum(self, is_integer)
+        if is_integer:
+            self.validators = [validators.validate_integer]
+            
+        super().__init__(segment, length, default, required, 0, value_from=value_from)
+
+    def validate_value(self, value):
+        return super().validate_value(value.value)

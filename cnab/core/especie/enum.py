@@ -52,5 +52,5 @@ class EspecieTitulo(Enum):
         if not code:
             raise CNABInvalidEspecieTituloError(default_value, bank)
         return code
-    
+
 __all__ = ['EspecieTitulo']

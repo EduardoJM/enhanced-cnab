@@ -20,9 +20,9 @@ class CNAB400Registro1(RegistroRemessa):
 
         self.header.counter += 1
     
-    def get_especie_titulo(self):
-        field = self.header.get_field('codigo_banco')
-        return EspecieTitulo.get_real_value(
-            field.default,
-            self.especie_titulo,
-        )
+    #def get_especie_titulo(self):
+    #    field = self.header.get_field('codigo_banco')
+    #    return EspecieTitulo.get_real_value(
+    #        field.default,
+    #        self.especie_titulo,
+    #    )

@@ -35,11 +35,11 @@ class CNAB240Registro3(RegistroRemessa):
         super().append(child)
         self.lote.counter += 1
 
-    def get_especie_titulo(self):
-        # TODO: rewrite this function
-        codigo_banco = self.get_field('codigo_banco')
-        return EspecieTitulo.get_real_value(
-            codigo_banco.default,
-            self.especie_titulo
-        )
+    #def get_especie_titulo(self):
+    #    # TODO: rewrite this function
+    #    codigo_banco = self.get_field('codigo_banco')
+    #    return EspecieTitulo.get_real_value(
+    #        codigo_banco.default,
+    #        self.especie_titulo
+    #    )
     
