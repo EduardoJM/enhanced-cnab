@@ -146,7 +146,10 @@ class CNABField:
         return self.format_value(unformated or default)
     
     def value_from_file(self, value: str) -> CNABFieldValueType:
-        return self.formatter.from_file(value)
+        try:
+            return self.formatter.from_file(value)
+        except Exception:
+            return self.default
 
     def __lt__(self, other):
         if not isinstance(other, CNABField):

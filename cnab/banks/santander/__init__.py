@@ -1,3 +1,3 @@
-from .cnab_240 import CNAB240Santander
+from .CNAB240 import CNAB240Santander
 
 __all__ = ['CNAB240Santander']
