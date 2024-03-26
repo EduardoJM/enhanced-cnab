@@ -2,6 +2,7 @@ from typing import Optional
 from cnab.base.cnab_240 import CNAB240Registro3
 from cnab.core.field import CNABFieldInteger, CNABFieldAlfa, CNABFieldDate, CNABFieldDecimal
 from cnab.base.registro import Registro
+from cnab.core.especie import CNABFieldEspecieTitulo
 from .registro3Q import Caixa240Registro3Q
 from .registro3R import Caixa240Registro3R
 from .registro3S1e2 import Caixa240Registro3S1e2
@@ -35,7 +36,7 @@ class Caixa240Registro3P(CNAB240Registro3):
     valor = CNABFieldDecimal("",length=13,default="0",precision=2,required=True)
     agencia_cobradora = CNABFieldInteger("",length=5, default="0", required=True)
     agencia_cobradora_dv = CNABFieldInteger("",length=1,default="0",required=True)
-    especie_titulo = CNABFieldInteger("",length=2, default="2", required=True)
+    especie_titulo = CNABFieldEspecieTitulo("",length=2, required=True)
     aceite = CNABFieldAlfa("",length=1, default="N", required=True)
     data_emissao = CNABFieldDate("",length=8, default="", required=True)
     codigo_juros = CNABFieldInteger("",length=1, default="3", required=True)

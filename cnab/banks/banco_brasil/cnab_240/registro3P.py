@@ -6,6 +6,7 @@ from cnab.core.field import (
     CNABFieldDate,
     CNABFieldAlfa,
 )
+from cnab.core.especie import CNABFieldEspecieTitulo
 from cnab.base.registro import Registro
 from .registro3Q import BancoBrasil240Registro3Q
 from .registro3R import BancoBrasil240Registro3R
@@ -39,7 +40,7 @@ class BancoBrasil240Registro3P(CNAB240Registro3):
     valor = CNABFieldDecimal("",length=13,default="0",precision=2,required=True,)
     agencia_cobradora = CNABFieldInteger("",length=5, default="0", required=True)
     agencia_cobradora_dv = CNABFieldAlfa("",length=1,default=" ",required=True,)
-    especie_titulo = CNABFieldInteger("",length=2, default="2", required=True)
+    especie_titulo = CNABFieldEspecieTitulo("", length=2, required=True)
     aceite = CNABFieldAlfa("",length=1, default="N", required=True)
     data_emissao = CNABFieldDate("",length=8, default="", required=True)
     codigo_juros = CNABFieldInteger("",length=1, default="3", required=True)

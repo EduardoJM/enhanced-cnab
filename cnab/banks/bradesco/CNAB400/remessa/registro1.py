@@ -1,8 +1,8 @@
 from typing import Optional
 from cnab.base.cnab_400 import CNAB400Registro1
 from cnab.core.field import CNABFieldInteger, CNABFieldAlfa, CNABFieldDecimal, CNABFieldDate
+from cnab.core.especie import CNABFieldEspecieTitulo
 from cnab.base.registro import Registro
-
 
 class BradescoCnab400Registro1(CNAB400Registro1):
     tipo_registro = CNABFieldInteger("001-001", length=1, default='1', required=True)
@@ -35,7 +35,7 @@ class BradescoCnab400Registro1(CNAB400Registro1):
     valor = CNABFieldDecimal("127-139", length=11, default='', precision=2, required=True)
     banco_cobrador = CNABFieldInteger("140-142", length=3, default='0', required=True)
     agencia_cobradora = CNABFieldInteger("143-147", length=5, default='0', required=True)
-    especie_titulo = CNABFieldInteger("148-149", length=2, default='1', required=True)
+    especie_titulo = CNABFieldEspecieTitulo("148-149", length=2, required=True)
     aceite = CNABFieldAlfa("150-150", length=1, default='N', required=True)
     data_emissao = CNABFieldDate("151-156", length=6, default='', required=True)
     cod_instrucao1 = CNABFieldInteger("157-158", length=2, default='0', required=True)

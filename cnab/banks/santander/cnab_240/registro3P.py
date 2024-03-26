@@ -1,6 +1,7 @@
 from typing import Optional
 from cnab.base.cnab_240 import CNAB240Registro3
 from cnab.core.field import CNABFieldInteger, CNABFieldAlfa, CNABFieldDate, CNABFieldDecimal
+from cnab.core.especie import CNABFieldEspecieTitulo
 from cnab.base.registro import Registro
 from cnab.utils.check_digit import compute_check_digit
 from .registro3Q import Santander240Registro3Q
@@ -34,7 +35,7 @@ class Santander240Registro3P(CNAB240Registro3):
     agencia_cobradora = CNABFieldInteger("",length=4, default="0", required=True)
     agencia_cobradora_dv = CNABFieldInteger("",length=1, default="0", required=True)
     filler5 = CNABFieldAlfa("",length=1, default=" ", required=True)
-    especie_titulo = CNABFieldInteger("",length=2, default="2", required=True)
+    especie_titulo = CNABFieldEspecieTitulo("",length=2, required=True)
     aceite = CNABFieldAlfa("",length=1, default="N", required=True)
     data_emissao = CNABFieldDate("",length=8, default="", required=True)
     codigo_juros = CNABFieldInteger("",length=1, default="0", required=True)

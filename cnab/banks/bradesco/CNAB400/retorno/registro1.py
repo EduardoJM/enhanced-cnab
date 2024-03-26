@@ -1,5 +1,6 @@
 from cnab.base.retorno.CNAB400 import Registro1Retorno
 from cnab.core.field import CNABFieldInteger, CNABFieldAlfa, CNABFieldDate, CNABFieldDecimal
+from cnab.core.especie import CNABFieldEspecieTitulo
 
 class BradescoRetornoCnab400Registro1(Registro1Retorno):
     tipo_registro = CNABFieldInteger("001-001", length= 1, default= '1', required =True)
@@ -28,7 +29,7 @@ class BradescoRetornoCnab400Registro1(Registro1Retorno):
     valor = CNABFieldDecimal("153-165",length= 11,default= '',precision= 2,required =True)
     codigo_banco = CNABFieldInteger("166-168",length= 3,default= '237',required =True)
     agencia_cobradora = CNABFieldAlfa("169-173",length= 5,default= '0',required =True)
-    especie_titulo = CNABFieldInteger("174-175",length= 2,default= '2',required =True)
+    especie_titulo = CNABFieldEspecieTitulo("174-175",length= 2,required =True)
     vlr_despesas_cobranca = CNABFieldDecimal("176-188",length= 11,default= '',precision= 2,required =True)
     vlr_outras_despesas = CNABFieldDecimal("189-201",length= 11,default= '',precision= 2,required =True)
     vlr_juros_atraso = CNABFieldDecimal("202-214",length= 11,default= '',precision= 2,required =True)

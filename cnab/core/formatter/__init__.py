@@ -4,6 +4,7 @@ from .alfa2 import FormatterAlfa2
 from .integer import FormatterInteger
 from .date import FormatterDate
 from .time import FormatterTime
+from .enum import FormatterEnum
 
 __all__ = [
     'FormatterDecimal',
@@ -12,4 +13,5 @@ __all__ = [
     'FormatterInteger',
     'FormatterDate',
     'FormatterTime',
+    'FormatterEnum',
 ]
