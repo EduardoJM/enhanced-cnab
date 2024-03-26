@@ -1,5 +1,5 @@
 from typing import Optional
-from cnab.base.cnab_240 import CNAB240Registro3
+from cnab.base.remessa.CNAB240 import CNAB240Registro3
 from cnab.core.field import (
     CNABFieldInteger,
     CNABFieldDecimal,
@@ -7,7 +7,7 @@ from cnab.core.field import (
     CNABFieldAlfa,
 )
 from cnab.core.especie import CNABFieldEspecieTitulo
-from cnab.base.registro import Registro
+from cnab.base.remessa import RegistroRemessa
 from .registro3Q import BancoBrasil240Registro3Q
 from .registro3R import BancoBrasil240Registro3R
 from .registro3S1e2 import BancoBrasil240Registro3S1e2
@@ -94,7 +94,7 @@ class BancoBrasil240Registro3P(CNAB240Registro3):
     def __init__(
         self,
         header: Optional[BancoBrasil240Registro0],
-        parent: Optional[Registro],
+        parent: Optional[RegistroRemessa],
         lote: BancoBrasil240Registro1,
         **kwargs: dict,):
         super().__init__(header, parent, lote, **kwargs)

@@ -1,9 +1,8 @@
 from typing import Optional
-from cnab.base.registro import Registro
-from cnab.base.registro_remessa import RegistroRemessa
+from cnab.base.remessa import RegistroRemessa
 
 class CNAB400Registro9(RegistroRemessa):
-    def __init__(self, header: Optional[Registro], parent: Optional[Registro], **kwargs: dict):
+    def __init__(self, header: Optional[RegistroRemessa], parent: Optional[RegistroRemessa], **kwargs: dict):
         super().__init__(header, parent, **kwargs)
         
         self.init_numero_registro()

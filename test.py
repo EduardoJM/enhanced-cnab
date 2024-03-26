@@ -72,7 +72,7 @@ cobranca = lote.inserir_detalhe(
     cod_carteira      ="01", # I para a maioria ddas carteiras do itau
      # campos necessarios somente para itau,  não precisa comentar se for outro layout    */
 
-    especie_titulo    =1, #"DM", # informar dm e sera convertido para codigo em qualquer laytou conferir em especie.php
+    especie_titulo    =EspecieTitulo.DuplicataMercantil, #"DM", # informar dm e sera convertido para codigo em qualquer laytou conferir em especie.php
     valor             =100.00, # Valor do boleto como float valido em php
     emissao_boleto    =2, # tipo de emissao do boleto informar 2 para emissao pelo beneficiario e 1 para emissao pelo banco
     protestar         =3, # 1 = Protestar com (Prazo) dias, 3 = Devolver após (Prazo) dias

@@ -1,7 +1,7 @@
 from typing import Optional
-from cnab.base.cnab_240 import CNAB240Registro3
+from cnab.base.remessa.CNAB240 import CNAB240Registro3
 from cnab.core.field import CNABFieldInteger, CNABFieldAlfa, CNABFieldDate, CNABFieldDecimal
-from cnab.base.registro import Registro
+from cnab.base.remessa import RegistroRemessa
 from cnab.core.especie import CNABFieldEspecieTitulo
 from .registro3Q import Caixa240Registro3Q
 from .registro3R import Caixa240Registro3R
@@ -89,7 +89,7 @@ class Caixa240Registro3P(CNAB240Registro3):
     def __init__(
         self,
         header: Optional[Caixa240Registro0],
-        parent: Optional[Registro],
+        parent: Optional[RegistroRemessa],
         lote: Caixa240Registro1,
         **kwargs: dict,
     ):

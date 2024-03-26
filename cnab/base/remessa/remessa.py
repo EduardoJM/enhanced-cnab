@@ -1,6 +1,6 @@
 from typing import List
 from abc import ABC
-from .cnab_240.registro0 import CNAB240Registro0
+from .CNAB240 import CNAB240Registro0
 
 class Remessa(ABC):
     header: CNAB240Registro0

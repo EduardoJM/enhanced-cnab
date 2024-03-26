@@ -1,8 +1,8 @@
 from typing import Optional
-from cnab.base.cnab_400 import CNAB400Registro1
+from cnab.base.remessa.CNAB400 import CNAB400Registro1
 from cnab.core.field import CNABFieldInteger, CNABFieldAlfa, CNABFieldDecimal, CNABFieldDate
 from cnab.core.especie import CNABFieldEspecieTitulo
-from cnab.base.registro import Registro
+from cnab.base.remessa import RegistroRemessa
 
 class BradescoCnab400Registro1(CNAB400Registro1):
     tipo_registro = CNABFieldInteger("001-001", length=1, default='1', required=True)
@@ -54,7 +54,7 @@ class BradescoCnab400Registro1(CNAB400Registro1):
     mensagem2 = CNABFieldAlfa("334-394", length=60, default=' ', required=True)
     numero_registro = CNABFieldInteger("395-400", length=6, default='0', required=True)
 
-    def __init__(self, header: Optional[Registro], parent: Optional[Registro], **kwargs: dict):
+    def __init__(self, header: Optional[RegistroRemessa], parent: Optional[RegistroRemessa], **kwargs: dict):
         super().__init__(header, parent, **kwargs)
 
     def inserir_mensagem(self, **kwargs):

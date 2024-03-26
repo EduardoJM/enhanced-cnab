@@ -1,5 +1,5 @@
 from typing import Optional, Union
-from cnab.base.cnab_240 import CNAB240Registro0
+from cnab.base.remessa.CNAB240 import CNAB240Registro0
 from cnab.core.field import (
     CNABFieldInteger,
     CNABFieldAlfa,
