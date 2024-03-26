@@ -303,11 +303,19 @@ class CNABFieldEnum(CNABFieldDescriptor[E], CNABField):
         value_from: Optional[str] = None,
     ):
         self.choices = choices
+        if not isinstance(default, self.choices):
+            raise ValueError("Enum value default is not instance of enum type.")
+
         self.formatter = formatter.FormatterEnum(self, is_integer)
         if is_integer:
             self.validators = [validators.validate_integer]
             
         super().__init__(segment, length, default, required, 0, value_from=value_from)
+
+    def __set__(self, instance, value: E):
+        if not isinstance(value, self.choices):
+            raise ValueError("Enum value is not instance of enum type.")
+        super().__set__(instance, value)
 
     def validate_value(self, value):
         return super().validate_value(value.value)
