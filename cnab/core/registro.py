@@ -24,7 +24,7 @@ class RegistroBase:
 
         super_new._meta = reduce(_get_cnab_meta, cnab_fields, {})
 
-        register_length = reduce(lambda prev, x: prev + x.length, cnab_fields, 0)
+        register_length = reduce(lambda prev, x: prev + x.get_real_length(), cnab_fields, 0)
         if register_length not in [240, 400]:
             logging.getLogger(__name__).warning(
                 "%s, Register length %s is not compatible with CNAB 240 or CNAB 400",
