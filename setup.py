@@ -16,6 +16,7 @@ setup(
     author_email="eduardo_y05@outlook.com",
     url="https://github.com/EduardoJM/enhanced-cnab",
     license="MIT",
+    install_requires=['Babel', 'Unidecode'],
     packages=find_packages(
         exclude=(
             "tests.*",
