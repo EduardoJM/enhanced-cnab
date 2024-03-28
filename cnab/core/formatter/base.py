@@ -4,6 +4,7 @@ from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from cnab.core.field import CNABField
 
+
 class FormatterBase(ABC):
     field: "CNABField"
 

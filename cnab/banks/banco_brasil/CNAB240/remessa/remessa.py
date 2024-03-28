@@ -8,7 +8,8 @@ from .registro9 import BancoBrasil240Registro9
 if TYPE_CHECKING:
     from .registro1 import BancoBrasil240Registro1
 
-@register_remessa_layout('001', 'CNAB240')
+
+@register_remessa_layout("001", "CNAB240")
 class CNAB240BancoBrasil(Remessa):
     header: BancoBrasil240Registro0
     registro0_class = BancoBrasil240Registro0
@@ -34,21 +35,23 @@ class CNAB240BancoBrasil(Remessa):
         numero_sequencial_arquivo: Optional[Union[str, int]] = None,
         **kwargs,
     ):
-        set_if_has_value(kwargs, 'codigo_lote', codigo_lote)
-        set_if_has_value(kwargs, 'tipo_registro', tipo_registro)
-        set_if_has_value(kwargs, 'tipo_inscricao', tipo_inscricao)
-        set_if_has_value(kwargs, 'numero_inscricao', numero_inscricao)
-        set_if_has_value(kwargs, 'convenio', convenio)
-        set_if_has_value(kwargs, 'cobranca_cedente', cobranca_cedente)
-        set_if_has_value(kwargs, 'carteira_cobranca', carteira_cobranca)
-        set_if_has_value(kwargs, 'variacao_carteira_cobranca', variacao_carteira_cobranca)
-        set_if_has_value(kwargs, 'agencia', agencia)
-        set_if_has_value(kwargs, 'agencia_dv', agencia_dv)
-        set_if_has_value(kwargs, 'conta', conta)
-        set_if_has_value(kwargs, 'conta_dv', conta_dv)
-        set_if_has_value(kwargs, 'nome_empresa', nome_empresa)
-        set_if_has_value(kwargs, 'codigo_remessa', codigo_remessa)
-        set_if_has_value(kwargs, 'numero_sequencial_arquivo', numero_sequencial_arquivo)
+        set_if_has_value(kwargs, "codigo_lote", codigo_lote)
+        set_if_has_value(kwargs, "tipo_registro", tipo_registro)
+        set_if_has_value(kwargs, "tipo_inscricao", tipo_inscricao)
+        set_if_has_value(kwargs, "numero_inscricao", numero_inscricao)
+        set_if_has_value(kwargs, "convenio", convenio)
+        set_if_has_value(kwargs, "cobranca_cedente", cobranca_cedente)
+        set_if_has_value(kwargs, "carteira_cobranca", carteira_cobranca)
+        set_if_has_value(
+            kwargs, "variacao_carteira_cobranca", variacao_carteira_cobranca
+        )
+        set_if_has_value(kwargs, "agencia", agencia)
+        set_if_has_value(kwargs, "agencia_dv", agencia_dv)
+        set_if_has_value(kwargs, "conta", conta)
+        set_if_has_value(kwargs, "conta_dv", conta_dv)
+        set_if_has_value(kwargs, "nome_empresa", nome_empresa)
+        set_if_has_value(kwargs, "codigo_remessa", codigo_remessa)
+        set_if_has_value(kwargs, "numero_sequencial_arquivo", numero_sequencial_arquivo)
         super().__init__(**kwargs)
 
     def inserir_lote(
@@ -58,6 +61,6 @@ class CNAB240BancoBrasil(Remessa):
         variacao: Optional[Union[str, int]] = None,
         **kwargs,
     ) -> "BancoBrasil240Registro1":
-        set_if_has_value(kwargs, 'tipo_servico', tipo_servico)
-        set_if_has_value(kwargs, 'variacao', variacao)
+        set_if_has_value(kwargs, "tipo_servico", tipo_servico)
+        set_if_has_value(kwargs, "variacao", variacao)
         return super().inserir_lote(**kwargs)

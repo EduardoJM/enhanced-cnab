@@ -2,6 +2,7 @@ from typing import List
 from abc import ABC
 from .CNAB240 import CNAB240Registro0
 
+
 class Remessa(ABC):
     header: CNAB240Registro0
     registro0_class = None
@@ -14,5 +15,5 @@ class Remessa(ABC):
         return self.header.inserir_lote(**kwargs)
 
     def get_text(self) -> List[str]:
-        footer = self.registro9_class(self.header, None, **{ '1': 1 })
+        footer = self.registro9_class(self.header, None, **{"1": 1})
         return self.header.get_text() + footer.get_text()

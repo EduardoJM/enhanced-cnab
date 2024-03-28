@@ -14,7 +14,7 @@ cnab = CNAB240Caixa(
     convenio="106608",  # codigo fornecido pelo banco
     carteira="17",  # codigo fornecido pelo banco
     situacao_arquivo="",  # Deve ficar em branco para ser aceito. (TS para testes)
-    codigo_beneficiario="112345"
+    codigo_beneficiario="112345",
 )
 lote = cnab.inserir_lote()
 cobranca = lote.inserir_detalhe(

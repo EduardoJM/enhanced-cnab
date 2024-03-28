@@ -7,11 +7,11 @@ from .time import FormatterTime
 from .enum import FormatterEnum
 
 __all__ = [
-    'FormatterDecimal',
-    'FormatterAlfa',
-    'FormatterAlfa2',
-    'FormatterInteger',
-    'FormatterDate',
-    'FormatterTime',
-    'FormatterEnum',
+    "FormatterDecimal",
+    "FormatterAlfa",
+    "FormatterAlfa2",
+    "FormatterInteger",
+    "FormatterDate",
+    "FormatterTime",
+    "FormatterEnum",
 ]

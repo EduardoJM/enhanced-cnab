@@ -20,7 +20,7 @@ CAIXA = {
     "ND": 19,
 }
 
-BANCO_BRASIL = { **CAIXA }
+BANCO_BRASIL = {**CAIXA}
 
 BRADESCO = {
     "DM": 1,
@@ -79,16 +79,16 @@ SICOOB = {
 }
 
 SICREDI = {
-    "DMI": 'A',
-    "DR": 'B',
-    "NP": 'C',
-    "NPR": 'D',
-    "NS": 'E',
-    "RC": 'G',
-    "LC": 'H',
-    "ND": 'I',
-    "TS": 'J',
-    "DIV": 'K',
+    "DMI": "A",
+    "DR": "B",
+    "NP": "C",
+    "NPR": "D",
+    "NS": "E",
+    "RC": "G",
+    "LC": "H",
+    "ND": "I",
+    "TS": "J",
+    "DIV": "K",
 }
 
 SANTANDER = {
@@ -136,18 +136,18 @@ BV = {
     "CH": 1,
     "DM": 2,
     "DS": 4,
-    'CC': 31,
+    "CC": 31,
 }
 
 BANKS = {
-    '104': CAIXA,
-    '341': ITAU,
-    '001': BANCO_BRASIL,
-    '237': BRADESCO,
-    '756': SICOOB,
-    '748': SICREDI,
-    '033': SANTANDER,
-    '084': BRADESCO,
-    '246': ABC,
-    '655': BV,
+    "104": CAIXA,
+    "341": ITAU,
+    "001": BANCO_BRASIL,
+    "237": BRADESCO,
+    "756": SICOOB,
+    "748": SICREDI,
+    "033": SANTANDER,
+    "084": BRADESCO,
+    "246": ABC,
+    "655": BV,
 }
