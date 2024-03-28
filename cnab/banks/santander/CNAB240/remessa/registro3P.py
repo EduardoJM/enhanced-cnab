@@ -1,16 +1,18 @@
 from typing import Optional
+
+from cnab.base.remessa import RegistroRemessa
 from cnab.base.remessa.CNAB240 import CNAB240Registro3
+from cnab.core.especie import CNABFieldEspecieTitulo
 from cnab.core.field import (
-    CNABFieldInteger,
     CNABFieldAlfa,
     CNABFieldDate,
     CNABFieldDecimal,
+    CNABFieldInteger,
 )
-from cnab.core.especie import CNABFieldEspecieTitulo
-from cnab.base.remessa import RegistroRemessa
 from cnab.utils.check_digit import compute_check_digit
-from .registro3Q import Santander240Registro3Q
+
 from .registro1 import Santander240Registro1
+from .registro3Q import Santander240Registro3Q
 from .registro3R import Santander240Registro3R
 
 

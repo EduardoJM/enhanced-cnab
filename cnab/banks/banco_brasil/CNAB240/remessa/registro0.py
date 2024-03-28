@@ -1,12 +1,14 @@
 from typing import Optional, Union
+
 from cnab.base.remessa.CNAB240 import CNAB240Registro0
 from cnab.core.field import (
-    CNABFieldInteger,
-    CNABFieldAlfa,
     CNABCreatedDateField,
     CNABCreatedTimeField,
+    CNABFieldAlfa,
+    CNABFieldInteger,
 )
 from cnab.utils.dict_utils import set_if_has_value
+
 from .registro1 import BancoBrasil240Registro1
 
 

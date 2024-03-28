@@ -1,6 +1,8 @@
 from typing import List, Union
+
 from cnab.base.retorno import Retorno
 from cnab.repository import register_retorno_layout
+
 from .registro0 import ItauRetornoCnab400Registro0
 from .registro9 import ItauRetornoCnab400Registro9
 

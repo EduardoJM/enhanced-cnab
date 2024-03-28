@@ -1,5 +1,7 @@
 from typing import Optional
+
 from cnab.base.remessa import RegistroRemessa
+
 from .registro1 import CNAB240Registro1
 
 

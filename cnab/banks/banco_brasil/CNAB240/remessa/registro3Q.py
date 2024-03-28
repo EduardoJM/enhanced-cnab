@@ -1,5 +1,5 @@
 from cnab.base.remessa.CNAB240 import CNAB240Registro3
-from cnab.core.field import CNABFieldInteger, CNABFieldAlfa
+from cnab.core.field import CNABFieldAlfa, CNABFieldInteger
 
 
 class BancoBrasil240Registro3Q(CNAB240Registro3):

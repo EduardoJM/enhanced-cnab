@@ -1,5 +1,5 @@
 from cnab.base.remessa import RegistroRemessa
-from cnab.core.field import CNABFieldInteger, CNABFieldAlfa
+from cnab.core.field import CNABFieldAlfa, CNABFieldInteger
 
 DEFAULT_NUMBER = 10
 DEFAULT_TEXT = "BANK_NAME"

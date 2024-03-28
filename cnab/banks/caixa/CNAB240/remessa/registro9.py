@@ -1,5 +1,5 @@
 from cnab.base.remessa.CNAB240 import CNAB240Registro9
-from cnab.core.field import CNABFieldInteger, CNABFieldAlfa
+from cnab.core.field import CNABFieldAlfa, CNABFieldInteger
 
 
 class Caixa240Registro9(CNAB240Registro9):

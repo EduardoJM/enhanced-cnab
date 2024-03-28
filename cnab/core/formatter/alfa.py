@@ -1,4 +1,5 @@
 from unidecode import unidecode
+
 from .base import FormatterBase
 
 

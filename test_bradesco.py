@@ -1,4 +1,5 @@
 from datetime import date
+
 from cnab.banks.bradesco import CNAB400Bradesco
 from cnab.core.especie import EspecieTitulo
 

@@ -1,6 +1,8 @@
 from typing import List, Union
+
 from cnab.base.retorno import Retorno
 from cnab.repository import register_retorno_layout
+
 from .registro0 import CaixaRetornoCnab240Registro0
 from .registro9 import CaixaRetornoCnab240Registro9
 

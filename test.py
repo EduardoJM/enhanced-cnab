@@ -1,5 +1,6 @@
 # from .cnab.remessa import Remessa
 from datetime import date
+
 from cnab.banks.santander import CNAB240Santander
 from cnab.core.especie import EspecieTitulo
 

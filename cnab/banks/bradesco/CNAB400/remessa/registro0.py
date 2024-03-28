@@ -1,5 +1,5 @@
 from cnab.base.remessa.CNAB400 import CNAB400Registro0
-from cnab.core.field import CNABFieldInteger, CNABFieldAlfa, CNABCreatedDateField
+from cnab.core.field import CNABCreatedDateField, CNABFieldAlfa, CNABFieldInteger
 
 
 class BradescoCnab400Registro0(CNAB400Registro0):

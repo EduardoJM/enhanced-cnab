@@ -1,10 +1,8 @@
-from typing import List, TYPE_CHECKING
-from enum import Enum
 from abc import ABC
-from .exceptions import (
-    RetornoEmptyFile,
-    RetornoInvalidLineLength,
-)
+from enum import Enum
+from typing import TYPE_CHECKING, List
+
+from .exceptions import RetornoEmptyFile, RetornoInvalidLineLength
 
 if TYPE_CHECKING:
     from .registro_retorno import RegistroRetorno

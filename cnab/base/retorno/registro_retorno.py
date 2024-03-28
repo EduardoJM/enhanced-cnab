@@ -1,6 +1,8 @@
-from typing import Optional, Dict, List
+from typing import Dict, List, Optional
+
 from cnab.core.field import CNABField
 from cnab.core.registro import RegistroBase
+
 from .retorno import Retorno
 
 

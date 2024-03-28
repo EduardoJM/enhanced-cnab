@@ -1,19 +1,21 @@
 from typing import Optional
+
+from cnab.base.remessa import RegistroRemessa
 from cnab.base.remessa.CNAB240 import CNAB240Registro3
+from cnab.core.especie import CNABFieldEspecieTitulo
 from cnab.core.field import (
-    CNABFieldInteger,
     CNABFieldAlfa,
     CNABFieldDate,
     CNABFieldDecimal,
+    CNABFieldInteger,
 )
-from cnab.base.remessa import RegistroRemessa
-from cnab.core.especie import CNABFieldEspecieTitulo
+
+from .registro0 import Caixa240Registro0
+from .registro1 import Caixa240Registro1
 from .registro3Q import Caixa240Registro3Q
 from .registro3R import Caixa240Registro3R
 from .registro3S1e2 import Caixa240Registro3S1e2
 from .registro3S3 import Caixa240Registro3S3
-from .registro1 import Caixa240Registro1
-from .registro0 import Caixa240Registro0
 
 
 class Caixa240Registro3P(CNAB240Registro3):

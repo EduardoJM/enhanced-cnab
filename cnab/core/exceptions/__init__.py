@@ -1,14 +1,12 @@
+from .especie import CNABInvalidEspecieTituloError
 from .field import (
-    CNABFieldValueRequiredError,
-    CNABFieldNotIntegerError,
     CNABFieldNotDecimalError,
+    CNABFieldNotIntegerError,
+    CNABFieldValueRequiredError,
     IsNotCNABFieldError,
     IsNotValidDateTimeError,
 )
-
 from .types import CNABInvalidTypeError
-
-from .especie import CNABInvalidEspecieTituloError
 
 __all__ = [
     "CNABFieldValueRequiredError",

@@ -1,6 +1,8 @@
 from typing import TYPE_CHECKING
+
 from cnab.base.remessa import Remessa
 from cnab.repository import register_remessa_layout
+
 from .registro0 import ItauCnab400Registro0
 from .registro9 import ItauCnab400Registro9
 

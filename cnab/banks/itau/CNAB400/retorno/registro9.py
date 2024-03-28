@@ -1,5 +1,5 @@
 from cnab.base.retorno.CNAB400 import Registro9Retorno
-from cnab.core.field import CNABFieldInteger, CNABFieldAlfa, CNABFieldDecimal
+from cnab.core.field import CNABFieldAlfa, CNABFieldDecimal, CNABFieldInteger
 
 
 class ItauRetornoCnab400Registro9(Registro9Retorno):

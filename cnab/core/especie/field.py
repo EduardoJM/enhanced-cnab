@@ -1,5 +1,7 @@
 from typing import Optional
+
 from cnab.core.field import CNABFieldEnum
+
 from .enum import EspecieTitulo
 
 

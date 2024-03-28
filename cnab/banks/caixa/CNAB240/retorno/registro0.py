@@ -1,10 +1,8 @@
 from typing import List
+
 from cnab.base.retorno.CNAB240 import Registro0Retorno
-from cnab.core.field import (
-    CNABFieldInteger,
-    CNABFieldAlfa,
-    CNABFieldDate,
-)
+from cnab.core.field import CNABFieldAlfa, CNABFieldDate, CNABFieldInteger
+
 from .registro1 import CaixaRetornoCnab240Registro1
 from .registro5 import CaixaRetornoCnab240Registro5
 

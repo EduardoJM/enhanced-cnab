@@ -1,11 +1,11 @@
 from cnab.base.retorno.CNAB400 import Registro1Retorno
-from cnab.core.field import (
-    CNABFieldInteger,
-    CNABFieldAlfa,
-    CNABFieldDecimal,
-    CNABFieldDate,
-)
 from cnab.core.especie import CNABFieldEspecieTitulo
+from cnab.core.field import (
+    CNABFieldAlfa,
+    CNABFieldDate,
+    CNABFieldDecimal,
+    CNABFieldInteger,
+)
 
 
 class ItauRetornoCnab400Registro1(Registro1Retorno):

@@ -1,5 +1,6 @@
 from cnab.base.retorno import Retorno
 from cnab.repository import register_retorno_layout
+
 from .registro0 import BradescoRetornoCnab400Registro0
 from .registro9 import BradescoRetornoCnab400Registro9
 

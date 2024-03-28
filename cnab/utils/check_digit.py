@@ -1,5 +1,5 @@
-from typing import Union
 from functools import reduce
+from typing import Union
 
 
 class Modulo11Calculator:

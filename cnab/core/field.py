@@ -1,9 +1,10 @@
-from functools import total_ordering
-from typing import Union, List, Optional, Callable, Generic, TypeVar, TYPE_CHECKING
-from enum import Enum
+from datetime import date, datetime, time
 from decimal import Decimal
-from datetime import date, time, datetime
-from . import validators, formatter
+from enum import Enum
+from functools import total_ordering
+from typing import TYPE_CHECKING, Callable, Generic, List, Optional, TypeVar, Union
+
+from . import formatter, validators
 
 if TYPE_CHECKING:
     from cnab.base.registro_remessa import RegistroRemessa

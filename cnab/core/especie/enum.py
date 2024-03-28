@@ -1,7 +1,9 @@
 from abc import abstractmethod
 from enum import Enum
 from typing import Union
+
 from cnab.core.exceptions import CNABInvalidEspecieTituloError
+
 from .banks import BANKS
 
 

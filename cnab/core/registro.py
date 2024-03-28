@@ -1,5 +1,6 @@
 import logging
 from functools import reduce
+
 from cnab.core.field import CNABField
 
 

@@ -1,7 +1,9 @@
-import pytest
 from enum import Enum
-from cnab.core.registro import RegistroBase
+
+import pytest
+
 from cnab.core.field import CNABFieldEnum
+from cnab.core.registro import RegistroBase
 
 
 class EnumA(Enum):

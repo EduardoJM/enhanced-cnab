@@ -1,11 +1,13 @@
 from typing import List, Union
+
 from cnab.base.retorno.CNAB240 import Registro3Retorno
 from cnab.core.field import (
-    CNABFieldInteger,
     CNABFieldAlfa,
     CNABFieldDate,
     CNABFieldDecimal,
+    CNABFieldInteger,
 )
+
 from .registro3U import CaixaRetornoCnab240Registro3U
 from .registro3Y08 import CaixaRetornoCnab240Registro3Y08
 

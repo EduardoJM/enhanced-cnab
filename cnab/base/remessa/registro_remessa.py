@@ -1,7 +1,8 @@
-from typing import Optional, List
+from typing import List, Optional
+
+from cnab.core import exceptions
 from cnab.core.field import CNABField
 from cnab.core.registro import RegistroBase
-from cnab.core import exceptions
 
 
 class RegistroRemessa(RegistroBase):

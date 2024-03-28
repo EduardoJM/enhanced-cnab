@@ -1,4 +1,5 @@
 from datetime import date
+
 from cnab.banks.itau import CNAB400Itau
 from cnab.core.especie import EspecieTitulo
 

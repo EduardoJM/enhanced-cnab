@@ -1,7 +1,9 @@
-from typing import Optional, Union, TYPE_CHECKING
+from typing import TYPE_CHECKING, Optional, Union
+
 from cnab.base.remessa import Remessa
-from cnab.utils.dict_utils import set_if_has_value
 from cnab.repository import register_remessa_layout
+from cnab.utils.dict_utils import set_if_has_value
+
 from .registro0 import BancoBrasil240Registro0
 from .registro9 import BancoBrasil240Registro9
 

@@ -1,4 +1,5 @@
 from typing import Dict
+
 from cnab.base.remessa import Remessa
 from cnab.base.retorno import Retorno
 

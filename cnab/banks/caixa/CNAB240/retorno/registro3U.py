@@ -1,9 +1,9 @@
 from cnab.base.retorno.CNAB240 import Registro3Retorno
 from cnab.core.field import (
-    CNABFieldInteger,
     CNABFieldAlfa,
     CNABFieldDate,
     CNABFieldDecimal,
+    CNABFieldInteger,
 )
 
 

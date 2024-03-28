@@ -1,4 +1,5 @@
 from datetime import date
+
 from cnab.banks.caixa import CNAB240Caixa
 from cnab.core.especie import EspecieTitulo
 

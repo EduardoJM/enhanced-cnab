@@ -1,5 +1,6 @@
 from cnab.base.remessa import Remessa
 from cnab.repository import register_remessa_layout
+
 from .registro0 import Caixa240Registro0
 from .registro9 import Caixa240Registro9
 

@@ -1,5 +1,5 @@
 from cnab.base.retorno.CNAB400 import Registro4Retorno
-from cnab.core.field import CNABFieldInteger, CNABFieldAlfa
+from cnab.core.field import CNABFieldAlfa, CNABFieldInteger
 
 
 class BradescoRetornoCnab400Registro4(Registro4Retorno):

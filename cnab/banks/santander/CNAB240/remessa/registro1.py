@@ -1,9 +1,6 @@
 from cnab.base.remessa.CNAB240 import CNAB240Registro1
-from cnab.core.field import (
-    CNABFieldInteger,
-    CNABFieldAlfa,
-    CNABCreatedDateField,
-)
+from cnab.core.field import CNABCreatedDateField, CNABFieldAlfa, CNABFieldInteger
+
 from .registro5 import Santander240Registro5
 
 

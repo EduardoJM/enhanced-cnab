@@ -1,19 +1,21 @@
 from typing import Optional
-from cnab.base.remessa.CNAB240 import CNAB240Registro3
-from cnab.core.field import (
-    CNABFieldInteger,
-    CNABFieldDecimal,
-    CNABFieldDate,
-    CNABFieldAlfa,
-)
-from cnab.core.especie import CNABFieldEspecieTitulo
+
 from cnab.base.remessa import RegistroRemessa
+from cnab.base.remessa.CNAB240 import CNAB240Registro3
+from cnab.core.especie import CNABFieldEspecieTitulo
+from cnab.core.field import (
+    CNABFieldAlfa,
+    CNABFieldDate,
+    CNABFieldDecimal,
+    CNABFieldInteger,
+)
+
+from .registro0 import BancoBrasil240Registro0
+from .registro1 import BancoBrasil240Registro1
 from .registro3Q import BancoBrasil240Registro3Q
 from .registro3R import BancoBrasil240Registro3R
 from .registro3S1e2 import BancoBrasil240Registro3S1e2
 from .registro3S3 import BancoBrasil240Registro3S3
-from .registro1 import BancoBrasil240Registro1
-from .registro0 import BancoBrasil240Registro0
 
 
 class BancoBrasil240Registro3P(CNAB240Registro3):

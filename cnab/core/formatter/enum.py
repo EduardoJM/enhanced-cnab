@@ -1,6 +1,6 @@
+from .alfa import FormatterAlfa
 from .base import FormatterBase
 from .integer import FormatterInteger
-from .alfa import FormatterAlfa
 
 
 class FormatterEnum(FormatterBase):

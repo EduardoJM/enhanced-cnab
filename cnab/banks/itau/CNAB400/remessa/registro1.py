@@ -1,13 +1,15 @@
 from typing import Optional
-from cnab.base.remessa.CNAB400 import CNAB400Registro1
-from cnab.core.field import (
-    CNABFieldInteger,
-    CNABFieldAlfa,
-    CNABFieldDecimal,
-    CNABFieldDate,
-)
-from cnab.core.especie import CNABFieldEspecieTitulo
+
 from cnab.base.remessa import RegistroRemessa
+from cnab.base.remessa.CNAB400 import CNAB400Registro1
+from cnab.core.especie import CNABFieldEspecieTitulo
+from cnab.core.field import (
+    CNABFieldAlfa,
+    CNABFieldDate,
+    CNABFieldDecimal,
+    CNABFieldInteger,
+)
+
 from .registro2 import ItauCnab400Registro2
 
 

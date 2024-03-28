@@ -1,5 +1,5 @@
 from cnab.base.retorno.CNAB240 import Registro5Retorno
-from cnab.core.field import CNABFieldInteger, CNABFieldAlfa, CNABFieldDecimal
+from cnab.core.field import CNABFieldAlfa, CNABFieldDecimal, CNABFieldInteger
 
 
 class CaixaRetornoCnab240Registro5(Registro5Retorno):

@@ -1,6 +1,7 @@
 from typing import Optional
+
 from cnab.base.remessa import RegistroRemessa
-from cnab.core.enums import TipoServico, TipoInscricao
+from cnab.core.enums import TipoInscricao, TipoServico
 from cnab.core.exceptions import CNABInvalidTypeError
 
 

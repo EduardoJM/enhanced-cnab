@@ -1,7 +1,9 @@
-from typing import Optional, Union, TYPE_CHECKING
+from typing import TYPE_CHECKING, Optional, Union
+
 from cnab.base.remessa.CNAB240 import CNAB240Registro1
-from cnab.core.field import CNABFieldInteger, CNABFieldAlfa, CNABCreatedDateField
+from cnab.core.field import CNABCreatedDateField, CNABFieldAlfa, CNABFieldInteger
 from cnab.utils.dict_utils import set_if_has_value
+
 from .registro5 import BancoBrasil240Registro5
 
 if TYPE_CHECKING:

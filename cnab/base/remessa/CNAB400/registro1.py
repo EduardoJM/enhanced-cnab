@@ -1,4 +1,5 @@
 from typing import Optional
+
 from cnab.base.remessa import RegistroRemessa
 
 

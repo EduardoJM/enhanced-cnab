@@ -1,9 +1,9 @@
 from cnab.base.remessa.CNAB400 import CNAB400Registro2
 from cnab.core.field import (
-    CNABFieldInteger,
     CNABFieldAlfa,
     CNABFieldDate,
     CNABFieldDecimal,
+    CNABFieldInteger,
 )
 
 
