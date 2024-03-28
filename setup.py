@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import os
-from setuptools import setup, find_packages
+
+from setuptools import find_packages, setup
 
 f = open(os.path.join(os.path.dirname(__file__), "README.md"))
 readme = f.read()
@@ -16,7 +17,7 @@ setup(
     author_email="eduardo_y05@outlook.com",
     url="https://github.com/EduardoJM/enhanced-cnab",
     license="MIT",
-    install_requires=['Babel', 'Unidecode'],
+    install_requires=["Babel", "Unidecode"],
     packages=find_packages(
         exclude=(
             "tests.*",
