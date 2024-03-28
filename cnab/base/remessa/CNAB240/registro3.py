@@ -1,11 +1,15 @@
 from typing import Optional
+
 from cnab.base.remessa import RegistroRemessa
+
 from .registro1 import CNAB240Registro1
+
 
 class CNAB240Registro3(RegistroRemessa):
     lote: CNAB240Registro1 = None
 
-    def __init__(self,
+    def __init__(
+        self,
         header: Optional[RegistroRemessa],
         parent: Optional[RegistroRemessa],
         lote: CNAB240Registro1,
@@ -23,12 +27,12 @@ class CNAB240Registro3(RegistroRemessa):
         value = self.seu_numero2
         if value:
             return value
-        
-        if hasattr(self, 'get_nosso_numero'):
+
+        if hasattr(self, "get_nosso_numero"):
             return self.get_nosso_numero()
-        
+
         return self.nosso_numero
-    
+
     def append(self, child: RegistroRemessa):
         super().append(child)
         self.lote.counter += 1

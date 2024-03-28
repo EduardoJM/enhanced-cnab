@@ -1,7 +1,7 @@
 from cnab.banks.caixa import CNAB400CaixaRetorno
 from cnab.banks.caixa.CNAB240.retorno.registro0 import CaixaRetornoCnab240Registro0
 
-with open('./retorno_cnab240_caixa.ret', 'r') as f:
+with open("./retorno_cnab240_caixa.ret", "r") as f:
     text = f.read()
 
 ret = CNAB400CaixaRetorno(text)
@@ -17,4 +17,4 @@ for lote in lotes:
     registros = lote.children
     for reg in registros:
         for child in reg.children:
-            print(child.codigo_movimento)
+            print(child.seu_numero)

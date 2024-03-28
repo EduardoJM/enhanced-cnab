@@ -1,7 +1,7 @@
 from cnab.banks.itau import CNAB400ItauRetorno
 from cnab.banks.itau.CNAB400.retorno.registro0 import ItauRetornoCnab400Registro0
 
-with open('./retorno_cnab400_itau.ret', 'r') as f:
+with open("./retorno_cnab400_itau.ret", "r") as f:
     text = f.read()
 
 ret = CNAB400ItauRetorno(text)

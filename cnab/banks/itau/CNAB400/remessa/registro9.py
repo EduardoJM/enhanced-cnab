@@ -1,5 +1,5 @@
 from cnab.base.remessa.CNAB400 import CNAB400Registro9
-from cnab.core.field import CNABFieldInteger, CNABFieldAlfa
+from cnab.core.field import CNABFieldAlfa, CNABFieldInteger
 
 
 class ItauCnab400Registro9(CNAB400Registro9):

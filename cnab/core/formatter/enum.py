@@ -1,6 +1,7 @@
+from .alfa import FormatterAlfa
 from .base import FormatterBase
 from .integer import FormatterInteger
-from .alfa import FormatterAlfa
+
 
 class FormatterEnum(FormatterBase):
     behaviour_integer: bool
@@ -13,6 +14,6 @@ class FormatterEnum(FormatterBase):
         if self.behaviour_integer:
             return FormatterInteger(self.field).to_file(value)
         return FormatterAlfa(self.field).to_file(value)
-    
+
     def from_file(self, value):
         raise NotImplementedError("TODO: implements this.")

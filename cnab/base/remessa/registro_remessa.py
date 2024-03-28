@@ -1,7 +1,9 @@
-from typing import Optional, List
+from typing import List, Optional
+
+from cnab.core import exceptions
 from cnab.core.field import CNABField
 from cnab.core.registro import RegistroBase
-from cnab.core import exceptions
+
 
 class RegistroRemessa(RegistroBase):
     parent: Optional["RegistroRemessa"] = None
@@ -10,11 +12,16 @@ class RegistroRemessa(RegistroBase):
     _children: List["RegistroRemessa"] = []
     _meta: Optional[dict] = None
 
-    def __init__(self, header: Optional["RegistroRemessa"], parent: Optional["RegistroRemessa"], **kwargs: dict):
+    def __init__(
+        self,
+        header: Optional["RegistroRemessa"],
+        parent: Optional["RegistroRemessa"],
+        **kwargs: dict,
+    ):
         self.header = header
         self._children = []
         self.parent = parent
-        
+
         setted = []
         for key, value in kwargs.items():
             setted = [*setted, key]
@@ -29,11 +36,10 @@ class RegistroRemessa(RegistroBase):
             if value is None:
                 continue
             setattr(self, key, value)
-        
+
         if not parent:
             return
         parent.append(self)
-
 
     def get_field(self, key: str) -> CNABField:
         # TODO: remove this
@@ -44,7 +50,7 @@ class RegistroRemessa(RegistroBase):
         return item
 
     def get_codigo_carteira(self):
-        if not hasattr(self, 'codigo_carteira'):
+        if not hasattr(self, "codigo_carteira"):
             return None
         value = self.codigo_carteira
         if not value:
@@ -55,10 +61,10 @@ class RegistroRemessa(RegistroBase):
         self._children.append(child)
 
     def get_text(self) -> str:
-        retorno = ''
+        retorno = ""
         for _, field in self._meta.items():
             retorno += field.get_value()
-            
+
         result = [retorno]
 
         for child in self._children:

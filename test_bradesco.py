@@ -1,4 +1,5 @@
 from datetime import date
+
 from cnab.banks.bradesco import CNAB400Bradesco
 from cnab.core.especie import EspecieTitulo
 
@@ -14,7 +15,7 @@ cnab = CNAB400Bradesco(
 lote = cnab.inserir_lote()
 
 lote.inserir_detalhe(
-    tipo_inscricao_empresa='2',
+    tipo_inscricao_empresa="2",
     numero_inscricao_empresa="39845082000100",
     nosso_numero="1800001",
     data_vencimento=date(2018, 4, 5),
@@ -28,7 +29,7 @@ lote.inserir_detalhe(
     cep_pagador="75140430",
     cidade_pagador="Anápolis",
     uf_pagador="GO",
-    especie_titulo=EspecieTitulo.DuplicataMercantil
+    especie_titulo=EspecieTitulo.DuplicataMercantil,
 )
 
 lines = [*cnab.get_text(), ""]

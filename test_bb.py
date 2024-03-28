@@ -1,4 +1,5 @@
 from datetime import date
+
 from cnab.banks.banco_brasil import CNAB240BancoBrasil
 from cnab.core.especie import EspecieTitulo
 
