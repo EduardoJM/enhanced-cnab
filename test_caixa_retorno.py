@@ -17,4 +17,4 @@ for lote in lotes:
     registros = lote.children
     for reg in registros:
         for child in reg.children:
-            print(child.codigo_movimento)
+            print(child.seu_numero)
